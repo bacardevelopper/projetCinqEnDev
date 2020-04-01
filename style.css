@@ -1,0 +1,54 @@
+/* tout se qui touche au éléments de la page */
+body{
+    margin:0;
+    display:flex;
+    justify-content:center;
+}
+/* #btnMenu */
+#menuBtn{
+    position:fixed;
+    top:10px;
+    left:10px;
+    width:50px;
+    z-index:9;
+}
+/* fin #btnMenu */
+
+
+/* le corps de la page accueil */
+.productScroll{
+    position:absolute;
+    top:80px;
+    padding:1%;
+    width:85%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    background-color:#FADBD8;
+    margin-bottom:50px;
+}
+
+.product{
+    width:80%;
+    height:210px;
+    background-color:#EC7063;
+    margin-bottom:10px;
+    margin-top:10px;
+    border-radius:25px;
+    padding:1%;
+    display:flex;
+    align-items:center;
+    
+}
+
+.product img{
+    width:9rem;
+}
+
+.infoProduct{
+    background-color:white;
+    width:60%;
+    height:80%;
+    margin-left:15%;
+    border-radius:20px;
+}
