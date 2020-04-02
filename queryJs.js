@@ -1,11 +1,13 @@
 // le stockage dans temporaire fonctionement
 
 
+
  /* recuper et ajouter dans la page vue ou (accueil) */
  //differencier les pages
 let titrePage = document.querySelector("title");
 let valeurTitre = titrePage.textContent;
 let ajouterProduit = document.querySelector("a");
+let fctAjouter = document.getElementsByTagName("a");
 
  
  
@@ -15,19 +17,22 @@ let ajouterProduit = document.querySelector("a");
 
  let cpt = 0;
  let reponse;
+
+
 /* fin des variables supergloables */
 
 //déclaration fonction qui insere les elements dans le dom
 function recupInserer(){
     //boucle de création insertion
 while(cpt < reponse.length){
-    let btnAjout = document.createElement("button");
+    
     let linkAjout = document.createElement("a");
 
     linkAjout.setAttribute("class",reponse[cpt]._id);
+    linkAjout.setAttribute("id","elementatester"+""+[cpt]+"");
     linkAjout.setAttribute("target","_blank");
-    btnAjout.textContent = "Ajouter";
-    linkAjout.appendChild(btnAjout);
+    linkAjout.textContent = "Ajouter";
+    
 
     let divInfo = document.createElement("div");
     divInfo.setAttribute("id","divInfo");
@@ -66,15 +71,45 @@ while(cpt < reponse.length){
     
 
     cpt++;
-    }            
+    }  
+    ////////////////// * *////////////////////////////////////////
+    
+
+    function affProduit(){
+        document.addEventListener("click", function(e){
+            
+            let attributeVerif = e.target.getAttribute("class");
+            
+
+            const tabAttributeVerif = ["5be1ed3f1c9d44000030b061","5be1ef211c9d44000030b062","5be9bc241c9d440000a730e7",
+                                        "5be9c4471c9d440000a730e8","5be9c4c71c9d440000a730e9"];
+            //à remplacer par switch au plutot
+            if(attributeVerif === tabAttributeVerif[0]){
+                console.log(attributeVerif);
+            }else if(attributeVerif === tabAttributeVerif[1]){
+                console.log(attributeVerif);
+            }else if(attributeVerif === tabAttributeVerif[2]){
+                console.log(attributeVerif);
+            }else if(attributeVerif === tabAttributeVerif[3]){
+                console.log(attributeVerif);
+            }else if(attributeVerif === tabAttributeVerif[4]){
+                console.log(attributeVerif);
+            }else{
+
+            }
+        });
+    }
+    //lancement de la fonction dans la focntion
+    affProduit();
+    
+
 }
 
-// fontion page produit
 
 
-function pageProduit(){
 
-}
+
+
 
 
 
@@ -98,7 +133,7 @@ function pageProduit(){
                 //la solution c'est recuperer la propriete response
                 reponse = JSON.parse(this.response);
                     //appel de la fonction
-                          recupInserer();          
+                          recupInserer();        
             }
         // fin de si
     }
@@ -107,6 +142,7 @@ function pageProduit(){
     req.open("GET","http://localhost:3000/api/cameras");
     req.send();
  }
+
 // fin de fonction get
 get();
 //appel de la fonction
