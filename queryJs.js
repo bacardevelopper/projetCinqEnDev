@@ -1,25 +1,88 @@
+// le stockage dans temporaire fonctionement
+
+
  /* recuper et ajouter dans la page vue ou (accueil) */
+ //differencier les pages
+let titrePage = document.querySelector("title");
+let valeurTitre = titrePage.textContent;
+let ajouterProduit = document.querySelector("a");
+
+ 
+ 
  /* mes variables superglobales */
  let productScroll = document.querySelector(".productScroll");
- console.log(productScroll);
+ 
 
  let cpt = 0;
  let reponse;
 /* fin des variables supergloables */
-//fonction qui inserer les elements dans le dom
- function recupInserer(){
-    while(cpt < reponse.length){
-        let article = document.createElement("article");
-        article.setAttribute("class","product");
-        console.log(article);
-        let imageArticle = document.createElement("img");
-        imageArticle.setAttribute("src",reponse[cpt].imageUrl);
-        imageArticle.style.borderRadius = "25px";
-        productScroll.appendChild(article);
-        article.appendChild(imageArticle);
-        cpt++;
+
+//déclaration fonction qui insere les elements dans le dom
+function recupInserer(){
+    //boucle de création insertion
+while(cpt < reponse.length){
+    let btnAjout = document.createElement("button");
+    let linkAjout = document.createElement("a");
+
+    linkAjout.setAttribute("class",reponse[cpt]._id);
+    linkAjout.setAttribute("target","_blank");
+    btnAjout.textContent = "Ajouter";
+    linkAjout.appendChild(btnAjout);
+
+    let divInfo = document.createElement("div");
+    divInfo.setAttribute("id","divInfo");
+    let article = document.createElement("article");
+    let name = document.createElement("h3");
+    let imageArticle = document.createElement("img");
+    let description = document.createElement("p");
+    let prix = document.createElement("h4");
+        ///attribution de class et de valeur
+    article.setAttribute("class","product");
+    imageArticle.setAttribute("src",reponse[cpt].imageUrl);
+    name.textContent = reponse[cpt].name;
+    prix.textContent = String(reponse[cpt].price);
+    description.textContent = reponse[cpt].description;
+        ///
+    
+        ///
+    
+    article.appendChild(imageArticle);
+    
+    divInfo.appendChild(name);
+    divInfo.appendChild(description);
+    divInfo.appendChild(prix);
+
+        // verifier si c'est la page produit ou pas
+        if(valeurTitre !== "produit - orinico"){
+                productScroll.appendChild(article);
+        }else{
+                console.log("c'est la page produit");
+        }
+    
+    article.appendChild(divInfo); 
+    article.appendChild(linkAjout);  
+    console.log(article);
+
+    
+
+    cpt++;
     }            
 }
+
+// fontion page produit
+
+
+function pageProduit(){
+
+}
+
+
+
+
+
+
+
+
 
  // fonction get (recuperer les elements du backend )
  function get(){
@@ -44,7 +107,7 @@
     req.open("GET","http://localhost:3000/api/cameras");
     req.send();
  }
-
+// fin de fonction get
 get();
 //appel de la fonction
 
