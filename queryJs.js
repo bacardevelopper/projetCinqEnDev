@@ -38,10 +38,11 @@ let tabProduit = [
         imageUrl: "http://localhost:3000/images/vcam_5.jpg"
     }
 ];
-
+// tableaux qui enregistre les produits à chaque click
 let produitPageAttente = [
 
 ];
+
 
 
  /* recuper et ajouter dans la page vue ou (accueil) */
@@ -63,7 +64,7 @@ let productPage = document.querySelector(".productPage");
 
 /* fin des variables supergloables */
 
-//déclaration fonction qui insere les elements dans le dom
+//déclaration fonction qui insere les elements dans le dom de la page accueil
 function recupInserer(){
     //boucle de création insertion
 while(cpt < reponse.length){
@@ -135,6 +136,7 @@ while(cpt < reponse.length){
 
                 console.log(produitZero);
                 produitPageAttente.push(produitZero);
+                localStorage.setItem("produitStorage", JSON.stringify(produitPageAttente));
 
                 console.log(produitPageAttente);
             }else if(attributeVerif === tabProduit[1]._id){
@@ -147,6 +149,7 @@ while(cpt < reponse.length){
 
                 console.log(produitUn);
                 produitPageAttente.push(produitUn);
+                localStorage.setItem("produitStorage", JSON.stringify(produitPageAttente));
 
                 
             }else if(attributeVerif === tabProduit[2]._id){
@@ -160,6 +163,7 @@ while(cpt < reponse.length){
 
                 console.log(produitDeux);
                 produitPageAttente.push(produitDeux);
+                localStorage.setItem("produitStorage", JSON.stringify(produitPageAttente));
 
             }else if(attributeVerif === tabProduit[3]._id){
 
@@ -172,6 +176,7 @@ while(cpt < reponse.length){
 
                 console.log(produitTrois);
                 produitPageAttente.push(produitTrois);
+                localStorage.setItem("produitStorage", JSON.stringify(produitPageAttente));
 
             }else if(attributeVerif === tabProduit[4]._id){
 
@@ -184,6 +189,7 @@ while(cpt < reponse.length){
 
                 console.log(produitQuatre);
                 produitPageAttente.push(produitQuatre);
+                localStorage.setItem("produitStorage", JSON.stringify(produitPageAttente));
 
             }else{
 
@@ -197,7 +203,11 @@ while(cpt < reponse.length){
 }
 
 
+function testerProduit(){
+    console.log(JSON.parse(localStorage.getItem("produitStorage")));
+}
 
+testerProduit();
 
 
 
