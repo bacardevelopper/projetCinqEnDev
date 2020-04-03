@@ -1,5 +1,47 @@
 // le stockage dans temporaire fonctionement
+// ce array d'objet  sert que à comparer les produits, j'utilise ajax get pour les recuperer et les afficher dans page de vue (ligne 160)
 
+let tabProduit = [
+    {
+        _id: "5be1ed3f1c9d44000030b061",
+        name: "Zurss 50S",
+        price: 49900,
+        description: "azmoifhfzeofimazhefiomhioash zaioemhfioaze hfezaio jfze oimfhze iozdhfmoaezfheaziof jazefio eazhf iohefzai mo",
+        imageUrl: "http://localhost:3000/images/vcam_1.jpg"
+    },
+    {
+        _id: "5be1ef211c9d44000030b062",
+        name: "Hirsch 400DTS",
+        description: "zmoifghaerzmioh azmoif hazeo irhzf oirzh arzmoifhaez fiomazeh fiomzh efiomhzr arzomih ",
+        price: 309900,
+        imageUrl: "http://localhost:3000/images/vcam_2.jpg"
+    },
+    {
+        _id: "5be9bc241c9d440000a730e7",
+        name: "Franck JS 105",
+        price: 209900,
+        description: "aomziehf aoiezhfaizeofheaziof' iomazefio ahzo imazehf iozemhfeaz ioh eamzofh",
+        imageUrl: "http://localhost:3000/images/vcam_3.jpg"
+    },
+    {
+        _id: "5be9c4471c9d440000a730e8",
+        name: "Kuros TTS",
+        description: "mroifh azmo iehzaf omiezahfzefmoeza ihaez fmoihaze iomeazfhezm oaif ehaziomf ehazio",
+        price: 159900,
+        imageUrl: "http://localhost:3000/images/vcam_4.jpg"
+    },
+    {
+        _id: "5be9c4c71c9d440000a730e9",
+        name: "Katatone",
+        description: "zeaomi az mofize iazmoh azmof ihaz eomihfazo miazeh fiomahzfm",
+        price: 59900,
+        imageUrl: "http://localhost:3000/images/vcam_5.jpg"
+    }
+];
+
+let produitPageAttente = [
+
+];
 
 
  /* recuper et ajouter dans la page vue ou (accueil) */
@@ -8,7 +50,7 @@ let titrePage = document.querySelector("title");
 let valeurTitre = titrePage.textContent;
 let ajouterProduit = document.querySelector("a");
 let fctAjouter = document.getElementsByTagName("a");
-
+let productPage = document.querySelector(".productPage");
  
  
  /* mes variables superglobales */
@@ -75,32 +117,81 @@ while(cpt < reponse.length){
     ////////////////// * *////////////////////////////////////////
     
 
-    function affProduit(){
+    function gestionPageProduit(){
         document.addEventListener("click", function(e){
             
             let attributeVerif = e.target.getAttribute("class");
             
 
-            const tabAttributeVerif = ["5be1ed3f1c9d44000030b061","5be1ef211c9d44000030b062","5be9bc241c9d440000a730e7",
-                                        "5be9c4471c9d440000a730e8","5be9c4c71c9d440000a730e9"];
+            
             //à remplacer par switch au plutot
-            if(attributeVerif === tabAttributeVerif[0]){
-                console.log(attributeVerif);
-            }else if(attributeVerif === tabAttributeVerif[1]){
-                console.log(attributeVerif);
-            }else if(attributeVerif === tabAttributeVerif[2]){
-                console.log(attributeVerif);
-            }else if(attributeVerif === tabAttributeVerif[3]){
-                console.log(attributeVerif);
-            }else if(attributeVerif === tabAttributeVerif[4]){
-                console.log(attributeVerif);
+            if(attributeVerif === tabProduit[0]._id){
+                const produitZero = {
+                    id : tabProduit[0]._id,
+                    nom : tabProduit[0].name,
+                    prix : tabProduit[0].price,
+                    description : tabProduit[0].description
+                };
+
+                console.log(produitZero);
+                produitPageAttente.push(produitZero);
+
+                console.log(produitPageAttente);
+            }else if(attributeVerif === tabProduit[1]._id){
+                const produitUn = {
+                    id : tabProduit[1]._id,
+                    nom : tabProduit[1].name,
+                    prix : tabProduit[1].price,
+                    description : tabProduit[1].description
+                };
+
+                console.log(produitUn);
+                produitPageAttente.push(produitUn);
+
+                
+            }else if(attributeVerif === tabProduit[2]._id){
+
+                const produitDeux = {
+                    id : tabProduit[2]._id,
+                    nom : tabProduit[2].name,
+                    prix : tabProduit[2].price,
+                    description : tabProduit[2].description
+                };
+
+                console.log(produitDeux);
+                produitPageAttente.push(produitDeux);
+
+            }else if(attributeVerif === tabProduit[3]._id){
+
+                const produitTrois = {
+                    id : tabProduit[3]._id,
+                    nom : tabProduit[3].name,
+                    prix : tabProduit[3].price,
+                    description : tabProduit[3].description
+                };
+
+                console.log(produitTrois);
+                produitPageAttente.push(produitTrois);
+
+            }else if(attributeVerif === tabProduit[4]._id){
+
+                const produitQuatre = {
+                    id : tabProduit[4]._id,
+                    nom : tabProduit[4].name,
+                    prix : tabProduit[4].price,
+                    description : tabProduit[4].description
+                };
+
+                console.log(produitQuatre);
+                produitPageAttente.push(produitQuatre);
+
             }else{
 
             }
         });
     }
-    //lancement de la fonction dans la focntion
-    affProduit();
+    //lancement de la fonction dans la fonction
+    gestionPageProduit();
     
 
 }
