@@ -38,33 +38,32 @@ let tabProduit = [
         imageUrl: "http://localhost:3000/images/vcam_5.jpg"
     }
 ];
-// tableaux qui enregistre les produits à chaque click
-let produitPageAttente = [
 
+let produitPageAttente = [
 ];
 
 
 
  /* recuper et ajouter dans la page vue ou (accueil) */
+  
+ /* mes variables superglobales */
  //differencier les pages
 let titrePage = document.querySelector("title");
 let valeurTitre = titrePage.textContent;
 let ajouterProduit = document.querySelector("a");
 let fctAjouter = document.getElementsByTagName("a");
-let productPage = document.querySelector(".productPage");
+
  
- 
- /* mes variables superglobales */
- let productScroll = document.querySelector(".productScroll");
+let productScroll = document.querySelector(".productScroll");
  
 
- let cpt = 0;
- let reponse;
+let cpt = 0;
+let reponse;
 
 
 /* fin des variables supergloables */
 
-//déclaration fonction qui insere les elements dans le dom de la page accueil
+//déclaration fonction qui insere les elements dans le dom de la page accueil (page vue)
 function recupInserer(){
     //boucle de création insertion
 while(cpt < reponse.length){
@@ -114,24 +113,24 @@ while(cpt < reponse.length){
     
 
     cpt++;
-    }  
+    }
+}
     ////////////////// * *////////////////////////////////////////
     
-
+    /***** fonction qui l'ajout à la page produit  */
     function gestionPageProduit(){
+        //recupération de l'évenement
         document.addEventListener("click", function(e){
-            
             let attributeVerif = e.target.getAttribute("class");
-            
-
-            
+            //recuperation des données selon son identifiant et enregistrement dans le storage
             //à remplacer par switch au plutot
             if(attributeVerif === tabProduit[0]._id){
                 const produitZero = {
                     id : tabProduit[0]._id,
                     nom : tabProduit[0].name,
                     prix : tabProduit[0].price,
-                    description : tabProduit[0].description
+                    description : tabProduit[0].description,
+                    url : tabProduit[0].imageUrl
                 };
 
                 console.log(produitZero);
@@ -144,7 +143,8 @@ while(cpt < reponse.length){
                     id : tabProduit[1]._id,
                     nom : tabProduit[1].name,
                     prix : tabProduit[1].price,
-                    description : tabProduit[1].description
+                    description : tabProduit[1].description,
+                    url : tabProduit[1].imageUrl
                 };
 
                 console.log(produitUn);
@@ -158,7 +158,8 @@ while(cpt < reponse.length){
                     id : tabProduit[2]._id,
                     nom : tabProduit[2].name,
                     prix : tabProduit[2].price,
-                    description : tabProduit[2].description
+                    description : tabProduit[2].description,
+                    url : tabProduit[2].imageUrl
                 };
 
                 console.log(produitDeux);
@@ -171,7 +172,8 @@ while(cpt < reponse.length){
                     id : tabProduit[3]._id,
                     nom : tabProduit[3].name,
                     prix : tabProduit[3].price,
-                    description : tabProduit[3].description
+                    description : tabProduit[3].description,
+                    url : tabProduit[3].imageUrl
                 };
 
                 console.log(produitTrois);
@@ -184,7 +186,8 @@ while(cpt < reponse.length){
                     id : tabProduit[4]._id,
                     nom : tabProduit[4].name,
                     prix : tabProduit[4].price,
-                    description : tabProduit[4].description
+                    description : tabProduit[4].description,
+                    url : tabProduit[4].imageUrl
                 };
 
                 console.log(produitQuatre);
@@ -196,30 +199,15 @@ while(cpt < reponse.length){
             }
         });
     }
+    /* finde la fonction gestion d'ajout à la page produit */
     //lancement de la fonction dans la fonction
     gestionPageProduit();
-    
-
-}
-
-
-function testerProduit(){
-    console.log(JSON.parse(localStorage.getItem("produitStorage")));
-}
-
-testerProduit();
 
 
 
 
 
-
-
-
-
-
-
-
+/***************************************************** debut fonction get */
  // fonction get (recuperer les elements du backend )
  function get(){
      /* variable et fct global à get */
@@ -244,7 +232,7 @@ testerProduit();
     req.send();
  }
 
-// fin de fonction get
+/* fin de fonction get */
 get();
 //appel de la fonction
 
