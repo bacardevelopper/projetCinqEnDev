@@ -35,3 +35,20 @@ function testerProduit(){
 }
 
 testerProduit();
+
+function changementEtatEnr(){
+    // variable qui recuperer definitivement les produits
+    let store = localStorage.getItem("produitStorage");
+
+    
+    
+    let clickO = document.querySelector(".lol");
+        clickO.addEventListener("click", ()=>{
+            let storeDef = localStorage.setItem("definitif", store);
+    });
+    
+
+
+}
+
+changementEtatEnr();

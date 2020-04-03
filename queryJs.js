@@ -44,6 +44,8 @@ let produitPageAttente = [
 
 
 
+
+
  /* recuper et ajouter dans la page vue ou (accueil) */
   
  /* mes variables superglobales */
@@ -120,17 +122,20 @@ while(cpt < reponse.length){
     /***** fonction qui l'ajout à la page produit  */
     function gestionPageProduit(){
         //recupération de l'évenement
+        let cleComprare;
         document.addEventListener("click", function(e){
             let attributeVerif = e.target.getAttribute("class");
             //recuperation des données selon son identifiant et enregistrement dans le storage
             //à remplacer par switch au plutot
             if(attributeVerif === tabProduit[0]._id){
+                cleComprare = Math.random() * 100;
                 const produitZero = {
                     id : tabProduit[0]._id,
                     nom : tabProduit[0].name,
                     prix : tabProduit[0].price,
                     description : tabProduit[0].description,
-                    url : tabProduit[0].imageUrl
+                    url : tabProduit[0].imageUrl,
+                    cle : cleComprare
                 };
 
                 console.log(produitZero);
@@ -139,12 +144,14 @@ while(cpt < reponse.length){
 
                 console.log(produitPageAttente);
             }else if(attributeVerif === tabProduit[1]._id){
+                cleComprare = Math.random() * 100;
                 const produitUn = {
                     id : tabProduit[1]._id,
                     nom : tabProduit[1].name,
                     prix : tabProduit[1].price,
                     description : tabProduit[1].description,
-                    url : tabProduit[1].imageUrl
+                    url : tabProduit[1].imageUrl,
+                    cle : cleComprare
                 };
 
                 console.log(produitUn);
@@ -153,13 +160,14 @@ while(cpt < reponse.length){
 
                 
             }else if(attributeVerif === tabProduit[2]._id){
-
+                cleComprare = Math.random() * 100;
                 const produitDeux = {
                     id : tabProduit[2]._id,
                     nom : tabProduit[2].name,
                     prix : tabProduit[2].price,
                     description : tabProduit[2].description,
-                    url : tabProduit[2].imageUrl
+                    url : tabProduit[2].imageUrl,
+                    cle : cleComprare
                 };
 
                 console.log(produitDeux);
@@ -167,13 +175,14 @@ while(cpt < reponse.length){
                 localStorage.setItem("produitStorage", JSON.stringify(produitPageAttente));
 
             }else if(attributeVerif === tabProduit[3]._id){
-
+                cleComprare = Math.random() * 100;
                 const produitTrois = {
                     id : tabProduit[3]._id,
                     nom : tabProduit[3].name,
                     prix : tabProduit[3].price,
                     description : tabProduit[3].description,
-                    url : tabProduit[3].imageUrl
+                    url : tabProduit[3].imageUrl,
+                    cle : cleComprare
                 };
 
                 console.log(produitTrois);
@@ -181,13 +190,14 @@ while(cpt < reponse.length){
                 localStorage.setItem("produitStorage", JSON.stringify(produitPageAttente));
 
             }else if(attributeVerif === tabProduit[4]._id){
-
+                cleComprare = Math.random() * 100;
                 const produitQuatre = {
                     id : tabProduit[4]._id,
                     nom : tabProduit[4].name,
                     prix : tabProduit[4].price,
                     description : tabProduit[4].description,
-                    url : tabProduit[4].imageUrl
+                    url : tabProduit[4].imageUrl,
+                    cle : cleComprare
                 };
 
                 console.log(produitQuatre);
