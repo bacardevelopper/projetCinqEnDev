@@ -1,6 +1,4 @@
-/* déclaration des variables globaux */
 let productPage = document.querySelector(".productPage");
-
 function testerProduit(){
     let produitAjouterPage = JSON.parse(localStorage.getItem("produitStorage"));
     let iPcpt = 0;
@@ -10,7 +8,7 @@ function testerProduit(){
 
             let articleProduit = document.createElement("article");
             let imageProduit = document.createElement("img");
-            let prixProduit = document.createElement("span");
+            let prixProduit = document.createElement("span"); 
             let nameProduit = document.createElement("span");
             let description = document.createElement("p");;
             let divProduit = document.createElement("div");
@@ -36,19 +34,55 @@ function testerProduit(){
 
 testerProduit();
 
-function changementEtatEnr(){
-    // variable qui recuperer definitivement les produits
-    let store = localStorage.getItem("produitStorage");
-
-    
-    
-    let clickO = document.querySelector(".lol");
-        clickO.addEventListener("click", ()=>{
-            let storeDef = localStorage.setItem("definitif", store);
-    });
-    
 
 
+
+////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+/* déclarer des une fonction qui recupere et qui met dans le panier */
+
+////
+
+function panierGestion(){
+    //recuperer la table produit storage et mis en objet js
+    let pSJSON = JSON.parse(localStorage.getItem("produitStorage"));
+    let panierPersist = [];
+
+    //données creer
+    localStorage.setItem("panierAttente", JSON.stringify(pSJSON));
+    localStorage.setItem("panierValider", JSON.stringify(panierPersist));
+
+    let panierPersistRecup = localStorage.getItem("panierValider");
+    let pPrP = JSON.stringify(panierPersistRecup);
+    let panierAttente = localStorage.getItem("panierAttente");
+
+
+
+    
+    if(pSJSON.length > 0){
+        console.log(" element tester "+pSJSON.length);
+
+            for(let num = 0; num < pSJSON.length; num++){
+                if(panierPersistRecup.length >= 0){
+                    if(pSJSON[num].cle !== pPrP[num].cle){
+                        console.log("la comparaison marche");
+    
+                        panierPersist.push(pSJSON[num]);
+                        localStorage.setItem("panierValider", JSON.stringify(panierPersist));
+                    }
+                }
+                
+            }
+    }else{
+
+    }
 }
 
-changementEtatEnr();
+panierGestion();
+
+

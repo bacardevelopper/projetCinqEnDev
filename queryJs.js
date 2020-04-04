@@ -121,9 +121,12 @@ while(cpt < reponse.length){
     
     /***** fonction qui l'ajout à la page produit  */
     function gestionPageProduit(){
+        
         //recupération de l'évenement
         let cleComprare;
+
         document.addEventListener("click", function(e){
+            
             let attributeVerif = e.target.getAttribute("class");
             //recuperation des données selon son identifiant et enregistrement dans le storage
             //à remplacer par switch au plutot
@@ -187,7 +190,7 @@ while(cpt < reponse.length){
 
                 console.log(produitTrois);
                 produitPageAttente.push(produitTrois);
-                localStorage.setItem("produitStorage", JSON.stringify(produitPageAttente));
+                localStorage.setItem("produitStorage", JSON.stringify(produitPageAttente)); 
 
             }else if(attributeVerif === tabProduit[4]._id){
                 cleComprare = Math.random() * 100;
@@ -207,11 +210,16 @@ while(cpt < reponse.length){
             }else{
 
             }
+            
         });
+                        
+             
     }
     /* finde la fonction gestion d'ajout à la page produit */
     //lancement de la fonction dans la fonction
     gestionPageProduit();
+    
+
 
 
 
