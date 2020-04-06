@@ -1,6 +1,5 @@
 // le stockage dans temporaire fonctionement
 // ce array d'objet  sert que à comparer les produits, j'utilise ajax get pour les recuperer et les afficher dans page de vue (ligne 160)
-
 let tabProduit = [
     {
         _id: "5be1ed3f1c9d44000030b061",
@@ -39,13 +38,6 @@ let tabProduit = [
     }
 ];
 
-let produitPageAttente = [
-];
-
-
-
-
-
  /* recuper et ajouter dans la page vue ou (accueil) */
   
  /* mes variables superglobales */
@@ -55,13 +47,10 @@ let valeurTitre = titrePage.textContent;
 let ajouterProduit = document.querySelector("a");
 let fctAjouter = document.getElementsByTagName("a");
 
- 
 let productScroll = document.querySelector(".productScroll");
  
-
 let cpt = 0;
 let reponse;
-
 
 /* fin des variables supergloables */
 
@@ -74,10 +63,9 @@ while(cpt < reponse.length){
 
     linkAjout.setAttribute("class",reponse[cpt]._id);
     linkAjout.setAttribute("id","elementatester"+""+[cpt]+"");
-    linkAjout.setAttribute("target","_blank");
+    linkAjout.setAttribute("rel","noreferrer");
     linkAjout.textContent = "Ajouter";
     
-
     let divInfo = document.createElement("div");
     divInfo.setAttribute("id","divInfo");
     let article = document.createElement("article");
@@ -91,9 +79,6 @@ while(cpt < reponse.length){
     name.textContent = reponse[cpt].name;
     prix.textContent = String(reponse[cpt].price);
     description.textContent = reponse[cpt].description;
-        ///
-    
-        ///
     
     article.appendChild(imageArticle);
     
@@ -112,117 +97,10 @@ while(cpt < reponse.length){
     article.appendChild(linkAjout);  
     console.log(article);
 
-    
-
     cpt++;
     }
 }
     ////////////////// * *////////////////////////////////////////
-    
-    /***** fonction qui l'ajout à la page produit  */
-    function gestionPageProduit(){
-        
-        //recupération de l'évenement
-        let cleComprare;
-
-        document.addEventListener("click", function(e){
-            
-            let attributeVerif = e.target.getAttribute("class");
-            //recuperation des données selon son identifiant et enregistrement dans le storage
-            //à remplacer par switch au plutot
-            if(attributeVerif === tabProduit[0]._id){
-                cleComprare = Math.random() * 100;
-                const produitZero = {
-                    id : tabProduit[0]._id,
-                    nom : tabProduit[0].name,
-                    prix : tabProduit[0].price,
-                    description : tabProduit[0].description,
-                    url : tabProduit[0].imageUrl,
-                    cle : cleComprare
-                };
-
-                console.log(produitZero);
-                produitPageAttente.push(produitZero);
-                localStorage.setItem("produitStorage", JSON.stringify(produitPageAttente));
-
-                console.log(produitPageAttente);
-            }else if(attributeVerif === tabProduit[1]._id){
-                cleComprare = Math.random() * 100;
-                const produitUn = {
-                    id : tabProduit[1]._id,
-                    nom : tabProduit[1].name,
-                    prix : tabProduit[1].price,
-                    description : tabProduit[1].description,
-                    url : tabProduit[1].imageUrl,
-                    cle : cleComprare
-                };
-
-                console.log(produitUn);
-                produitPageAttente.push(produitUn);
-                localStorage.setItem("produitStorage", JSON.stringify(produitPageAttente));
-
-                
-            }else if(attributeVerif === tabProduit[2]._id){
-                cleComprare = Math.random() * 100;
-                const produitDeux = {
-                    id : tabProduit[2]._id,
-                    nom : tabProduit[2].name,
-                    prix : tabProduit[2].price,
-                    description : tabProduit[2].description,
-                    url : tabProduit[2].imageUrl,
-                    cle : cleComprare
-                };
-
-                console.log(produitDeux);
-                produitPageAttente.push(produitDeux);
-                localStorage.setItem("produitStorage", JSON.stringify(produitPageAttente));
-
-            }else if(attributeVerif === tabProduit[3]._id){
-                cleComprare = Math.random() * 100;
-                const produitTrois = {
-                    id : tabProduit[3]._id,
-                    nom : tabProduit[3].name,
-                    prix : tabProduit[3].price,
-                    description : tabProduit[3].description,
-                    url : tabProduit[3].imageUrl,
-                    cle : cleComprare
-                };
-
-                console.log(produitTrois);
-                produitPageAttente.push(produitTrois);
-                localStorage.setItem("produitStorage", JSON.stringify(produitPageAttente)); 
-
-            }else if(attributeVerif === tabProduit[4]._id){
-                cleComprare = Math.random() * 100;
-                const produitQuatre = {
-                    id : tabProduit[4]._id,
-                    nom : tabProduit[4].name,
-                    prix : tabProduit[4].price,
-                    description : tabProduit[4].description,
-                    url : tabProduit[4].imageUrl,
-                    cle : cleComprare
-                };
-
-                console.log(produitQuatre);
-                produitPageAttente.push(produitQuatre);
-                localStorage.setItem("produitStorage", JSON.stringify(produitPageAttente));
-
-            }else{
-
-            }
-            
-        });
-                        
-             
-    }
-    /* finde la fonction gestion d'ajout à la page produit */
-    //lancement de la fonction dans la fonction
-    gestionPageProduit();
-    
-
-
-
-
 
 
 /***************************************************** debut fonction get */
@@ -253,6 +131,85 @@ while(cpt < reponse.length){
 /* fin de fonction get */
 get();
 //appel de la fonction
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/* recuperer et ajouter dans la page vue ou accueil */
+class Produit{
+    constructor(id, nom, prix, description, urlimg, cle){
+        this.id = id;
+        this.nom = nom;
+        this.prix = prix;
+        this.description = description;
+        this.urlimg = urlimg;
+        this.cle = cle;
+    }
+}
+
+
+function ajouterStorage(){
+    let tStorage = localStorage.length;
+    let incre = Math.random() * 10;
+    //je déclare un evenement
+                    document.addEventListener("click", function(e){ 
+                        let attributeVerif = e.target.getAttribute("class");
+
+                        if(attributeVerif === tabProduit[0]._id){
+                                incre = Math.random() * 10;
+                                let un = new Produit(tabProduit[0]._id, tabProduit[0].name, tabProduit[0].price, tabProduit[0].description, tabProduit[0].imageUrl);
+                                
+                                
+                                localStorage.setItem("panier"+incre, JSON.stringify(un));
+
+                        }else if(attributeVerif === tabProduit[1]._id){
+                                incre = Math.random() * 10;
+                                let deux = new Produit(tabProduit[1]._id, tabProduit[1].name, tabProduit[1].price, tabProduit[1].description, tabProduit[1].imageUrl);
+                                
+                                
+                                localStorage.setItem("panier"+incre, JSON.stringify(deux));
+
+                        }else if(attributeVerif === tabProduit[2]._id){
+                                incre = Math.random() * 10;
+                                let trois = new Produit(tabProduit[2]._id, tabProduit[2].name, tabProduit[2].price, tabProduit[2].description, tabProduit[2].imageUrl);
+                                localStorage.setItem("panier"+incre, JSON.stringify(trois));
+
+                        }else if(attributeVerif === tabProduit[3]._id){
+                                incre = Math.random() * 10;
+                                let quatre = new Produit(tabProduit[3]._id, tabProduit[3].name, tabProduit[3].price, tabProduit[3].description, tabProduit[3].imageUrl);
+                                
+                                
+                                localStorage.setItem("panier"+incre, JSON.stringify(quatre));  
+                        }else if(attributeVerif === tabProduit[4]._id){
+                                incre = Math.random() * 10;
+                                let cinq = new Produit(tabProduit[4]._id, tabProduit[4].name, tabProduit[4].price, tabProduit[4].description, tabProduit[4].imageUrl);
+                                
+                                
+                                localStorage.setItem("panier"+incre, JSON.stringify(cinq));
+                        }else{
+                            /* rien du tout */
+                        }
+   
+            });
+
+                                
+    }
+
+ajouterStorage();
+            /* *********************************************** */
+
+            function forEachKey() {
+                for (var i = 0; i < localStorage.length; i++) {
+                  console.log(localStorage.key(i));
+                }
+              }
+              
+            function getAffiche(){
+                for (var i = 0; i < localStorage.length; i++) {
+                    console.log(localStorage.getItem(localStorage.key(i)));
+                 }
+            }
+
+              forEachKey();
+              console.log("******************************************************");
+              getAffiche();
+
+
 
