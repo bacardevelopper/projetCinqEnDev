@@ -1,5 +1,6 @@
 // le stockage dans temporaire fonctionement
 // ce array d'objet  sert que à comparer les produits, j'utilise ajax get pour les recuperer et les afficher dans page de vue (ligne 160)
+//on va l'ameliorer 
 let tabProduit = [
     {
         _id: "5be1ed3f1c9d44000030b061",
@@ -105,7 +106,7 @@ while(cpt < reponse.length){
 
 /***************************************************** debut fonction get */
  // fonction get (recuperer les elements du backend )
- function get(){
+ async function get(){
      /* variable et fct global à get */
 
     // inserer dans le dom element recuperer */
@@ -143,6 +144,7 @@ class Produit{
         this.cle = cle;
     }
 }
+
 
 
 function ajouterStorage(){
@@ -193,23 +195,5 @@ function ajouterStorage(){
     }
 
 ajouterStorage();
-            /* *********************************************** */
-
-            function forEachKey() {
-                for (var i = 0; i < localStorage.length; i++) {
-                  console.log(localStorage.key(i));
-                }
-              }
-              
-            function getAffiche(){
-                for (var i = 0; i < localStorage.length; i++) {
-                    console.log(localStorage.getItem(localStorage.key(i)));
-                 }
-            }
-
-              forEachKey();
-              console.log("******************************************************");
-              getAffiche();
-
 
 

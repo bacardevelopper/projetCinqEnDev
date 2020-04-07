@@ -71,7 +71,7 @@ body{
 
 
 
-.product a{
+.product a, .produitPage a{
     color:white;
     border:0;
     width:100px;
@@ -81,27 +81,19 @@ body{
     text-align:center;
 
 }
-.product button{
-    color:white;
-    background-color:#BB8FCE;
-    border:0;
-    text-align: center;
-    font-weight:bold;
-}
-.product h3{
+
+.product h3, .produitPage h3{
     margin:5px;
 }
 
-.product img{
-    width:9rem;
+.product img, .produitPage img{
+    width:70%;
     margin:5px;
 }
 
-.infoProduct{
-    background-color:white;
-    width:60%;
-    height:80%;
-    margin-left:15%;
-    border-radius:20px;
+/* ************************************************************************************************ */
+
+.produitPage{
+
 }
 
