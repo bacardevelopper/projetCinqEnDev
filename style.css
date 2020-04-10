@@ -16,7 +16,7 @@ body{
 
 
 /* le corps de la page accueil */
-.productScroll, .produitPage{
+.productScroll, .produitPage, .panierPage{
     position:absolute;
     top:80px;
     padding:1%;

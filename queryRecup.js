@@ -105,5 +105,24 @@ const recupArticleUrl = () =>{
 /* appel de la fonction */
 recupArticleUrl();
 
+console.log("à parti d'ici tout le code qui est en dessous fait partie de la page Panier.html");
+/* la partie qui s'occupe d'afficher les produits personnaliser sur la page panier */
+
+//////////////////////////////
+
+function afficherDansLaPagePanier(){
+    let cpt = 0;
+
+    while(cpt < localStorage.length){
+        console.log(localStorage.getItem(localStorage.key(cpt)));
+
+        let elementRecupStorage = JSON.parse(localStorage.getItem(localStorage.key(cpt)));
+        console.log(elementRecupStorage);
+        cpt++;
+    }
+}
+
+afficherDansLaPagePanier();
+
 
 
