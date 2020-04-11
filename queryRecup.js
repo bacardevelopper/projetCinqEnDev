@@ -42,7 +42,7 @@ function ajouterPanier(){
         }
     });
 }
-//fin de fonction ajout au panier
+//fin de fonction ajout au panier (storage)
 const recupArticleUrl = () =>{
     if(idSansHash !== ""){
         // inserer dans le dom element recuperer */
@@ -73,6 +73,7 @@ const recupArticleUrl = () =>{
                         name.textContent = reponse.name;
                         prix.textContent = String(reponse.price);
                         description.textContent = reponse.description;
+                        //les touches personnalistaion
                         
                         produitPage.appendChild(imageArticle);
                         
@@ -123,6 +124,8 @@ function afficherDansLaPagePanier(){
 }
 
 afficherDansLaPagePanier();
+
+
 
 
 

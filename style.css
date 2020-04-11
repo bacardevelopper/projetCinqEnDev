@@ -16,7 +16,7 @@ body{
 
 
 /* le corps de la page accueil */
-.productScroll, .produitPage, .panierPage{
+.productScroll, .produitPage{
     position:absolute;
     top:80px;
     padding:1%;
@@ -92,8 +92,35 @@ body{
 }
 
 /* ************************************************************************************************ */
+/*
 
-.produitPage{
+*/
+/* ************************************************************ */
+.personnalisation p{
+    color:white;
+    font-weight:bold;
+    background-color:pink;
+    padding:5px;
+    border-radius:10px;
+}
+.personnalisation ul{
+    text-align:center;
+    text-decoration:none;
+    list-style-type: none;
+    color:pink;
+    background-color:white;
+    padding:0;
+    width:180px;
+    border-radius:15px;
+}
 
+.personnalisation li{
+    font-weight:bold;
+    padding:5px;
+    border-radius:10px;;
+
+}
+.personnalisation li:hover{
+    background-color:grey;
 }
 
