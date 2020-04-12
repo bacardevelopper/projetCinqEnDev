@@ -24,9 +24,8 @@ function ajouterPanier(){
     let cleMagique = Math.random() * 10;
     //class pour instancier les objets à ajouter au panier
     class ProduitAjout{
-        constructor(id, nom, prix, description, urlimg){
+        constructor(id, prix, description, urlimg){
             this.id = id;
-            this.nom = nom;
             this.prix = prix;
             this.description = description;
             this.urlimg = urlimg;
@@ -36,7 +35,7 @@ function ajouterPanier(){
     document.addEventListener("click", function(e){ 
         let attributeVerif = e.target.getAttribute("class");
         if(attributeVerif === reponse._id){
-            let ajoutPorduitStroage = new ProduitAjout(reponse._id, reponse.nam, reponse.price, reponse.description, reponse.imageUrl);
+            let ajoutPorduitStroage = new ProduitAjout(reponse._id, reponse.price, reponse.description, reponse.imageUrl);
             localStorage.setItem("panier"+cleMagique, JSON.stringify(ajoutPorduitStroage));
             cleMagique = Math.random() * 10;
         }
@@ -111,13 +110,40 @@ console.log("à parti d'ici tout le code qui est en dessous fait partie de la pa
 
 //////////////////////////////
 
-function afficherDansLaPagePanier(){
+async function afficherDansLaPagePanier(){
     let cpt = 0;
+    let resumePanier = document.querySelector(".resume");
 
     while(cpt < localStorage.length){
         console.log(localStorage.getItem(localStorage.key(cpt)));
 
         let elementRecupStorage = JSON.parse(localStorage.getItem(localStorage.key(cpt)));
+        //creation et ajout dans le dom
+        let eltImg = document.createElement("img");
+        let eltP = document.createElement("p");
+        let eltS = document.createElement("span");
+        let eltArt = document.createElement("artcile");
+        let eltParent = document.createElement("div");
+
+        //url image convert
+        
+        //attribution des valeur
+        eltP.textContent = elementRecupStorage.description;
+        eltS.textContent = String(elementRecupStorage.prix);
+        eltImg.setAttribute("src",elementRecupStorage.urlimg);
+
+        //ajout sur le dom
+        eltArt.appendChild(eltP);
+        eltArt.appendChild(eltS);
+        eltParent.setAttribute("id","flexResume");
+        eltParent.appendChild(eltImg);
+        eltParent.appendChild(eltArt);
+
+        ///////////////////////////
+        resumePanier.appendChild(eltParent)
+        
+        
+
         console.log(elementRecupStorage);
         cpt++;
     }
