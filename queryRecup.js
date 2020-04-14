@@ -9,7 +9,7 @@ let urlHashTag = parsedUrl.hash;
 console.log("le hash : "+urlHashTag);
 let tabHash = Array.from(urlHashTag);
 console.log(tabHash.shift());
-//supprimer la premiere element du tabaleaux
+//supprimer le premier element du tabaleaux
 let tabSimple = tabHash.splice(0);
 //convertit tableaux en chaine de caracteres
 let idSansHash = tabSimple.join("");
@@ -19,29 +19,30 @@ console.log(" id sans hash "+idSansHash);
 ///////////////////////////////////////////////////
 
 //fonction recuper et ajouter dans le panier storage
-
 function ajouterPanier(){
     let cleMagique = Math.random() * 10;
     //class pour instancier les objets à ajouter au panier
     class ProduitAjout{
-        constructor(id, prix, description, urlimg){
+        constructor(id){
             this.id = id;
-            this.prix = prix;
-            this.description = description;
-            this.urlimg = urlimg;
         }
     }
     //evenement qui recuperer et ajoute au panier
-    document.addEventListener("click", function(e){ 
+    document.addEventListener("click", function(e){
         let attributeVerif = e.target.getAttribute("class");
         if(attributeVerif === reponse._id){
-            let ajoutPorduitStroage = new ProduitAjout(reponse._id, reponse.price, reponse.description, reponse.imageUrl);
+            let ajoutPorduitStroage = new ProduitAjout(reponse._id);
             localStorage.setItem("panier"+cleMagique, JSON.stringify(ajoutPorduitStroage));
             cleMagique = Math.random() * 10;
         }
     });
 }
 //fin de fonction ajout au panier (storage)
+
+
+
+
+/* fonction recuperer et ajoute dans la page de personnalisation */
 const recupArticleUrl = () =>{
     if(idSansHash !== ""){
         // inserer dans le dom element recuperer */
@@ -94,16 +95,19 @@ const recupArticleUrl = () =>{
         req.open("GET","http://localhost:3000/api/cameras/"+idSansHashString);
         req.send();
 
-        //appel de la focntion ajoute au panier
+        //appel de la fonction ajoute au panier
         ajouterPanier();
-
     }
     //passage des parametres
-
 //fin de la fonction
 }
 /* appel de la fonction */
 recupArticleUrl();
+
+
+
+
+
 
 console.log("à parti d'ici tout le code qui est en dessous fait partie de la page Panier.html");
 /* la partie qui s'occupe d'afficher les produits personnaliser sur la page panier */
@@ -113,43 +117,37 @@ console.log("à parti d'ici tout le code qui est en dessous fait partie de la pa
 function afficherDansLaPagePanier(){
     let cpt = 0;
     let resumePanier = document.querySelector(".resume");
-
+    // recuperer les elements du tableaux
+    /*                                                  */
     while(cpt < localStorage.length){
-        console.log(localStorage.getItem(localStorage.key(cpt)));
+        let idRecuper = JSON.parse(localStorage.getItem(localStorage.key(cpt)));
+        let req = new XMLHttpRequest(); 
+        //fonction d'ecoute des requetes
+            req.onreadystatechange = function(){
+                if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
+                    let reponsPanier = JSON.parse(this.response);
+                    /*                                         */
+                    console.log("####### test de mon algorithme ######");
+                    console.log(idRecuper);
+                    console.log("**********************************");
+                    console.log(idRecuper.id);
+                    console.log("###### reponse reçu dans reponsPanier ######");
+                    console.log(reponsPanier);
+                }
 
-        let elementRecupStorage = JSON.parse(localStorage.getItem(localStorage.key(cpt)));
-        //creation et ajout dans le dom
-        let eltImg = document.createElement("img");
-        let eltP = document.createElement("p");
-        let eltS = document.createElement("span");
-        let eltArt = document.createElement("artcile");
-        let eltParent = document.createElement("div");
-
-        //url image convert
+            cpt++;
+        }
+        req.open("GET","http://localhost:3000/api/cameras/"+idRecuper.id);
+        req.send();
         
-        //attribution des valeur
-        eltP.textContent = elementRecupStorage.description;
-        eltS.textContent = String(elementRecupStorage.prix);
-        eltImg.setAttribute("src",elementRecupStorage.urlimg);
-
-        //ajout sur le dom
-        eltArt.appendChild(eltP);
-        eltArt.appendChild(eltS);
-        eltParent.setAttribute("id","flexResume");
-        eltParent.appendChild(eltImg);
-        eltParent.appendChild(eltArt);
-
-        ///////////////////////////
-        resumePanier.appendChild(eltParent)
-        
-        
-
-        console.log(elementRecupStorage);
-        cpt++;
     }
 }
-
+//appel de la fonction
 afficherDansLaPagePanier();
+
+
+
+
 
 
 
