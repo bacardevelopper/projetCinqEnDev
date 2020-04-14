@@ -110,7 +110,7 @@ console.log("à parti d'ici tout le code qui est en dessous fait partie de la pa
 
 //////////////////////////////
 
-async function afficherDansLaPagePanier(){
+function afficherDansLaPagePanier(){
     let cpt = 0;
     let resumePanier = document.querySelector(".resume");
 
@@ -150,6 +150,8 @@ async function afficherDansLaPagePanier(){
 }
 
 afficherDansLaPagePanier();
+
+
 
 
 

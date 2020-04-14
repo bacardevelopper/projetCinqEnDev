@@ -46,6 +46,7 @@
     flex-direction:row;
     justify-content:center;
     align-items:flex-start;
+    width:50%;
 }
 #flexResume img{
     width:90px;
