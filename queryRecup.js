@@ -138,7 +138,7 @@ function afficherDansLaPagePanier(){
                     console.log(reponsPanier.price);
 
                         //fonction calcul du total
-                        function ajoutAuDom(){
+                        async function ajoutAuDom(){
                             let eltAdd = reponsPanier;
                             let eltDom = document.createElement("article");
                             let eltImg = document.createElement("img");
