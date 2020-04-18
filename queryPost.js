@@ -8,11 +8,7 @@ let btnValider = document.querySelector("#envoyer");
 console.log(eltPrenom);
 var products = [];
 
-//
-
-
 ///////////////////////////////////////////////////////////////////////////////
-
 class Produit{
     constructor(id, name, price, description, imageUrl){
         this.id = id;
@@ -27,7 +23,6 @@ class Produit{
 }
 
 //class pour l'objet contact
-
 class Contact{
     constructor(firstName, lastName, address, city, email){
         this.firstName = firstName;
@@ -41,20 +36,19 @@ class Contact{
             }
 }
 
-
-
 /////////////////////////////////////////////////////
-
-
-function tester(){
+/* cette fonction permet de veriier si les champs ne sont pas vides st appel magique fonction */
+function postSurServer(){
         if(eltPrenom.value !== "" && eltNom.value !== "" && eltEmail.value !== "" && eltA.value !== "" && eltVille.value !== ""){
         //appel de la fonction post
             magique();               
         }
 }
-
+/* la fonction magique envois les données dans sur la route post order*/
 async function magique(){
     var order;
+    //variable qui recupere le tableaux des produits et les champs contact
+
     let valeurEnvoyer;
     var contact = new Contact(eltPrenom.value, eltNom.value, eltEmail.value, eltA.value, eltVille.value);
     order = {contact, products};
@@ -64,24 +58,27 @@ async function magique(){
     let requetePost = new XMLHttpRequest();
 
     requetePost.onreadystatechange = function(){
-            if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
-                let reponse = JSON.parse(this.response);
-                console.log("POST requete is functionnal");
+            if(this.readyState == XMLHttpRequest.DONE && this.status == 201){
+                let reponseTester = JSON.parse(this.response);
+ 
+                console.log("status "+this.status);
+                /* afficher l'order id qu'on doit afficher */
+                console.log(reponseTester.orderId);
+                console.log(valeurEnvoyer);
                 
                 console.log("ok");    
             }
-            console.log("status "+this.status);
-            console.log("reponse "+this.response); 
+            
     }                      
-    console.log(valeurEnvoyer);
-    requetePost.open("POST","http://localhost:3000/api/cameras/order");
-    requetePost.setRequestHeader("Content-Type", "application/json");
-    requetePost.send(valeurEnvoyer);
+    if(valeurEnvoyer.length > 1){
+        requetePost.open("POST","http://localhost:3000/api/cameras/order");
+        requetePost.setRequestHeader("Content-Type", "application/json");
+        requetePost.send(valeurEnvoyer);
+    }
+
 }
-
-
-
 //recuperer les articles // fonction
+/* cette fonction recuperer les elements qui sont dans le localstorage et ajoute dans le panier */ 
 const recupererLesArticles = async () => {
     let cpt = 0;
     
@@ -93,24 +90,19 @@ const recupererLesArticles = async () => {
                 //ecoute de la requete
                 if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
                     let rps = JSON.parse(this.response);
+                    /* ajouter l'id des produits dans le tableaux products */
                     let product_id = new Produit(rps._id, rps.name, rps.price, rps.description, rps.imageUrl);
-                    products.push(product_id.id);    
-
-
+                    products.push(product_id.id);
                 }
             cpt++;
         }
-        
         reqItemsRecup.open("GET","http://localhost:3000/api/cameras/"+idRecuper.id);
         reqItemsRecup.send();   
         
-        btnValider.addEventListener("click", tester); 
+        btnValider.addEventListener("click", postSurServer); 
     }
     console.log(products);
-    //en dehors de la boucle
-    
-
-    
+    //en dehors de la boucle   
 }
 
 recupererLesArticles();

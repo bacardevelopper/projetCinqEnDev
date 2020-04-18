@@ -1,6 +1,5 @@
 function afficherDansLaPagePanier(){
     let cpt = 0;
-
     let resumePanier = document.querySelector(".resume");
     // recuperer les elements du tableaux
     /*                                                  */
