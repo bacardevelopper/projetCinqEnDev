@@ -5,9 +5,17 @@ let eltEmail = document.querySelector(".email");
 let eltA = document.querySelector(".adresseVille");
 let eltVille = document.querySelector(".ville");
 let btnValider = document.querySelector("#envoyer");
+let panierPage = document.querySelector(".panierPage");
+let formulaireChild = document.querySelector(".formulaire");
+let resumeChild = document.querySelector(".resume");
+
+const messageMerci = document.createElement("h1");
+const msgIdOrder = document.createElement("h3");
+
+
+
 console.log(eltPrenom);
 var products = [];
-
 ///////////////////////////////////////////////////////////////////////////////
 class Produit{
     constructor(id, name, price, description, imageUrl){
@@ -21,7 +29,6 @@ class Produit{
         console.log(this.id +' '+ this.price );
     }
 }
-
 //class pour l'objet contact
 class Contact{
     constructor(firstName, lastName, address, city, email){
@@ -37,18 +44,31 @@ class Contact{
 }
 
 /////////////////////////////////////////////////////
+
+//fonction de fin de commande
+function endCommande(){
+    panierPage.removeChild(formulaireChild);
+    panierPage.removeChild(resumeChild);
+    localStorage.clear();
+}
+
 /* cette fonction permet de veriier si les champs ne sont pas vides st appel magique fonction */
 function postSurServer(){
-        if(eltPrenom.value !== "" && eltNom.value !== "" && eltEmail.value !== "" && eltA.value !== "" && eltVille.value !== ""){
-        //appel de la fonction post
-            magique();               
+        if(eltPrenom.value !== "" && eltNom.value !== "" && eltEmail.value !== ""
+        && eltA.value !== "" && eltVille.value !== ""){
+            //verification de l'email
+            if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(eltEmail.value)){
+                        //appel de la fonction post
+                magique();
+                endCommande();
+                /* document.location.href="confirmation.html"; */
+            } 
         }
 }
 /* la fonction magique envois les données dans sur la route post order*/
 async function magique(){
     var order;
     //variable qui recupere le tableaux des produits et les champs contact
-
     let valeurEnvoyer;
     var contact = new Contact(eltPrenom.value, eltNom.value, eltEmail.value, eltA.value, eltVille.value);
     order = {contact, products};
@@ -64,7 +84,15 @@ async function magique(){
                 console.log("status "+this.status);
                 /* afficher l'order id qu'on doit afficher */
                 console.log(reponseTester.orderId);
+                msgIdOrder.textContent = reponseTester.orderId;
+                messageMerci.textContent = "Merci pour votre commande";
+
+                
+                panierPage.appendChild(messageMerci);
+                panierPage.appendChild(msgIdOrder);
+
                 console.log(valeurEnvoyer);
+                /* panier page confirmation de commande */
                 
                 console.log("ok");    
             }
@@ -81,7 +109,6 @@ async function magique(){
 /* cette fonction recuperer les elements qui sont dans le localstorage et ajoute dans le panier */ 
 const recupererLesArticles = async () => {
     let cpt = 0;
-    
     while(cpt < localStorage.length){
         let idRecuper = JSON.parse(localStorage.getItem(localStorage.key(cpt)));
         let reqItemsRecup = new XMLHttpRequest(); 

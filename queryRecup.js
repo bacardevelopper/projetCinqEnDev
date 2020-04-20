@@ -40,7 +40,7 @@ function ajouterPanier(){
 //fin de fonction ajout au panier (storage)
 
 /* fonction recuperer et ajoute dans la page de personnalisation */
-const recupArticleUrl = () =>{
+async function recupArticleUrl(){
     if(idSansHash !== ""){
         // inserer dans le dom element recuperer */
      let req = new XMLHttpRequest(); 
@@ -102,14 +102,6 @@ const recupArticleUrl = () =>{
 recupArticleUrl();
 
 
-
-
-
-
-console.log("à parti d'ici tout le code qui est en dessous fait partie de la page Panier.html");
-/* la partie qui s'occupe d'afficher les produits personnaliser sur la page panier */
-
-//////////////////////////////
 
 
 

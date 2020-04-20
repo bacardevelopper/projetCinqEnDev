@@ -40,8 +40,7 @@ function afficherDansLaPagePanier(){
             cpt++;
         }
         req.open("GET","http://localhost:3000/api/cameras/"+idRecuper.id);
-        req.send();
-        
+        req.send();    
     }
 }
 //appel de la fonction
