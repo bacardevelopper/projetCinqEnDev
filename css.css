@@ -60,3 +60,23 @@
     border-radius:5px;
     color:white;
 }
+
+#spanTotal{
+    position:fixed;
+    top:10px;
+    right:10px;
+    width:50px;
+    z-index:9;
+    background-color:pink;
+    color:white;
+    font-weight:bold;
+    border-radius:10px;
+    padding:5px;
+}
+
+#menuBtn:hover{
+    width:250px;
+    height:350px;
+    background-color:#FEF5E7;
+    border-radius:15px;
+}

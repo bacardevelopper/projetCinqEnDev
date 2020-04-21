@@ -1,4 +1,4 @@
-function afficherDansLaPagePanier(){
+async function afficherDansLaPagePanier(){
     let cpt = 0;
     let resumePanier = document.querySelector(".resume");
     // recuperer les elements du tableaux
@@ -20,7 +20,7 @@ function afficherDansLaPagePanier(){
                     console.log(reponsPanier._id);
                     console.log(reponsPanier.price);
 
-                        //fonction calcul du total
+                        //ajout des articles selectionner dans le dom du panier
                         async function ajoutAuDom(){
                             let eltAdd = reponsPanier;
                             let eltDom = document.createElement("article");
@@ -39,6 +39,7 @@ function afficherDansLaPagePanier(){
 
             cpt++;
         }
+
         req.open("GET","http://localhost:3000/api/cameras/"+idRecuper.id);
         req.send();    
     }

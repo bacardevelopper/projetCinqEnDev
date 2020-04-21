@@ -1,5 +1,6 @@
 //recuperer les elements du formulaire
 let eltPrenom = document.querySelector(".prenom");
+let bodyElt = document.body;
 let eltNom = document.querySelector(".nom");
 let eltEmail = document.querySelector(".email");
 let eltA = document.querySelector(".adresseVille");
@@ -44,6 +45,14 @@ class Contact{
 }
 
 /////////////////////////////////////////////////////
+//fonction  qui affiche un total
+function totalAfficher(){
+    let totalHtml = document.createElement("span");
+    totalHtml.setAttribute("id","spanTotal");
+    totalHtml.textContent = JSON.parse(localStorage.getItem("total"));
+    bodyElt.appendChild(totalHtml);
+
+}
 
 //fonction de fin de commande
 function endCommande(){
@@ -52,7 +61,7 @@ function endCommande(){
     localStorage.clear();
 }
 
-/* cette fonction permet de veriier si les champs ne sont pas vides st appel magique fonction */
+/* cette fonction permet de verifer si les champs ne sont pas vides et appel les fonctions magique et endCommande à sa reussite*/
 function postSurServer(){
         if(eltPrenom.value !== "" && eltNom.value !== "" && eltEmail.value !== ""
         && eltA.value !== "" && eltVille.value !== ""){
@@ -88,6 +97,7 @@ async function magique(){
                 messageMerci.textContent = "Merci pour votre commande";
 
                 
+                
                 panierPage.appendChild(messageMerci);
                 panierPage.appendChild(msgIdOrder);
 
@@ -105,10 +115,12 @@ async function magique(){
     }
 
 }
+
 //recuperer les articles // fonction
 /* cette fonction recuperer les elements qui sont dans le localstorage et ajoute dans le panier */ 
 const recupererLesArticles = async () => {
     let cpt = 0;
+    let total = 0;
     while(cpt < localStorage.length){
         let idRecuper = JSON.parse(localStorage.getItem(localStorage.key(cpt)));
         let reqItemsRecup = new XMLHttpRequest(); 
@@ -119,12 +131,22 @@ const recupererLesArticles = async () => {
                     let rps = JSON.parse(this.response);
                     /* ajouter l'id des produits dans le tableaux products */
                     let product_id = new Produit(rps._id, rps.name, rps.price, rps.description, rps.imageUrl);
+
+                    //calcul du total
+                    total+=rps.price;console.log(total);
+                    localStorage.setItem("total", JSON.stringify(total));
+
+                    
                     products.push(product_id.id);
                 }
             cpt++;
         }
-        reqItemsRecup.open("GET","http://localhost:3000/api/cameras/"+idRecuper.id);
-        reqItemsRecup.send();   
+        
+        
+            reqItemsRecup.open("GET","http://localhost:3000/api/cameras/"+idRecuper.id);
+            reqItemsRecup.send(); 
+      
+          
         
         btnValider.addEventListener("click", postSurServer); 
     }
@@ -133,4 +155,9 @@ const recupererLesArticles = async () => {
 }
 
 recupererLesArticles();
+totalAfficher();
+
+//fonction qui affiche le total
+
+
 
