@@ -11,6 +11,15 @@ body{
     left:10px;
     width:50px;
     z-index:9;
+    display:flex;
+}
+
+#menuBtn a{
+    padding:5px;
+    margin:5px;
+    text-decoration:none;
+    font-weight:bold;
+    color:#EC7063;
 }
 /* fin #btnMenu */
 

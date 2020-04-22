@@ -41,8 +41,10 @@ async function afficherDansLaPagePanier(){
         }
 
         req.open("GET","http://localhost:3000/api/cameras/"+idRecuper.id);
-        req.send();    
+        req.send();
+           
     }
 }
 //appel de la fonction
 afficherDansLaPagePanier();
+

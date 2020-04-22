@@ -9,10 +9,13 @@ let btnValider = document.querySelector("#envoyer");
 let panierPage = document.querySelector(".panierPage");
 let formulaireChild = document.querySelector(".formulaire");
 let resumeChild = document.querySelector(".resume");
+let totalActualise = document.getElementById("spanTotal");
 
 const messageMerci = document.createElement("h1");
 const msgIdOrder = document.createElement("h3");
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 console.log(eltPrenom);
@@ -144,7 +147,9 @@ const recupererLesArticles = async () => {
         
         
             reqItemsRecup.open("GET","http://localhost:3000/api/cameras/"+idRecuper.id);
-            reqItemsRecup.send(); 
+            reqItemsRecup.send();
+            
+             
       
           
         
@@ -157,7 +162,7 @@ const recupererLesArticles = async () => {
 recupererLesArticles();
 totalAfficher();
 
-//fonction qui affiche le total
+//fonction qui actualise le total
 
 
 
