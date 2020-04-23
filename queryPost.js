@@ -9,11 +9,12 @@ let btnValider = document.querySelector("#envoyer");
 let panierPage = document.querySelector(".panierPage");
 let formulaireChild = document.querySelector(".formulaire");
 let resumeChild = document.querySelector(".resume");
-let totalActualise = document.getElementById("spanTotal");
+
 
 const messageMerci = document.createElement("h1");
 const msgIdOrder = document.createElement("h3");
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -54,7 +55,6 @@ function totalAfficher(){
     totalHtml.setAttribute("id","spanTotal");
     totalHtml.textContent = JSON.parse(localStorage.getItem("total"));
     bodyElt.appendChild(totalHtml);
-
 }
 
 //fonction de fin de commande
@@ -77,6 +77,7 @@ function postSurServer(){
             } 
         }
 }
+
 /* la fonction magique envois les données dans sur la route post order*/
 async function magique(){
     var order;
@@ -122,6 +123,8 @@ async function magique(){
 //recuperer les articles // fonction
 /* cette fonction recuperer les elements qui sont dans le localstorage et ajoute dans le panier */ 
 const recupererLesArticles = async () => {
+
+
     let cpt = 0;
     let total = 0;
     while(cpt < localStorage.length){
@@ -131,38 +134,41 @@ const recupererLesArticles = async () => {
         reqItemsRecup.onreadystatechange = function(){
                 //ecoute de la requete
                 if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
+                    
                     let rps = JSON.parse(this.response);
                     /* ajouter l'id des produits dans le tableaux products */
                     let product_id = new Produit(rps._id, rps.name, rps.price, rps.description, rps.imageUrl);
 
                     //calcul du total
-                    total+=rps.price;console.log(total);
+                    total += rps.price;console.log(total);
                     localStorage.setItem("total", JSON.stringify(total));
+                    totalAfficher();
 
                     
                     products.push(product_id.id);
                 }
+
             cpt++;
         }
-        
-        
+
             reqItemsRecup.open("GET","http://localhost:3000/api/cameras/"+idRecuper.id);
-            reqItemsRecup.send();
+            if(idRecuper.id !== undefined){
+                reqItemsRecup.send();
+            }
             
-             
-      
-          
         
         btnValider.addEventListener("click", postSurServer); 
     }
+    
     console.log(products);
     //en dehors de la boucle   
 }
 
 recupererLesArticles();
-totalAfficher();
+
 
 //fonction qui actualise le total
+
 
 
 
