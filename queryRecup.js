@@ -17,6 +17,29 @@ let idSansHashString = String(idSansHash);
 ///////////////////////////////////////////////////
 console.log(" id sans hash "+idSansHash);
 ///////////////////////////////////////////////////
+//fonction affichage d'erreur
+let bodyElt = document.body;
+let messageDerreur = document.createElement("h6");
+    messageDerreur.setAttribute("id","erreur");
+    messageDerreur.textContent = "selectionner produit à l'accueil";
+
+    function erreurMsg(){
+        setTimeout(function(){
+            bodyElt.appendChild(messageDerreur);
+        }, 500);
+
+        setTimeout(function(){
+            bodyElt.removeChild(messageDerreur);
+        }, 8400);
+        
+    }
+
+if(idSansHash !== ""){
+    console.log("produit selectionner");
+}else{
+    erreurMsg();
+    console.log("produit non selectionner");
+}
 
 //fonction recuper et ajouter dans le panier storage
 function ajouterPanier(){
@@ -55,6 +78,7 @@ async function recupArticleUrl(){
                         let linkAjout = document.createElement("a");
  
                         linkAjout.setAttribute("class",reponse._id);
+                        linkAjout.setAttribute("href","panier.html");
                         linkAjout.textContent = "Ajouter";
                         
                         let divInfo = document.createElement("div");

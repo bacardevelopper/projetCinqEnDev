@@ -9,7 +9,22 @@ let btnValider = document.querySelector("#envoyer");
 let panierPage = document.querySelector(".panierPage");
 let formulaireChild = document.querySelector(".formulaire");
 let resumeChild = document.querySelector(".resume");
+let messageDerreur = document.createElement("h6");
+    messageDerreur.setAttribute("id","erreur");
+    messageDerreur.textContent = "erreur verifier le champ ou selectionner produit";
 
+/* fonction message d'erreur */
+    function erreurMsg(){
+        setTimeout(function(){
+            bodyElt.appendChild(messageDerreur);
+        }, 500);
+
+        setTimeout(function(){
+            bodyElt.removeChild(messageDerreur);
+        }, 3400);
+    }
+
+/* fonction message d'erreur */
 
 const messageMerci = document.createElement("h1");
 const msgIdOrder = document.createElement("h3");
@@ -64,7 +79,8 @@ function endCommande(){
     localStorage.clear();
 }
 
-/* cette fonction permet de verifer si les champs ne sont pas vides et appel les fonctions magique et endCommande à sa reussite*/
+/* cette fonction permet de verifer si les champs ne sont pas vides
+ et appel les fonctions magique et endCommande à sa reussite*/
 function postSurServer(){
         if(eltPrenom.value !== "" && eltNom.value !== "" && eltEmail.value !== ""
         && eltA.value !== "" && eltVille.value !== ""){
@@ -75,6 +91,10 @@ function postSurServer(){
                 endCommande();
                 /* document.location.href="confirmation.html"; */
             } 
+        }else{
+            console.log("le champs et vide ou l'email n'est pas vide");
+            erreurMsg();
+            
         }
 }
 
@@ -98,7 +118,9 @@ async function magique(){
                 /* afficher l'order id qu'on doit afficher */
                 console.log(reponseTester.orderId);
                 msgIdOrder.textContent = reponseTester.orderId;
+                messageMerci.style.textAlign = "center";
                 messageMerci.textContent = "Merci pour votre commande";
+
 
                 
                 
@@ -157,7 +179,16 @@ const recupererLesArticles = async () => {
             }
             
         
-        btnValider.addEventListener("click", postSurServer); 
+        /* ecoute evenement click, pour envoit des articles et des informations sur le backend */
+        btnValider.addEventListener("click", function(){
+            //bloc l'envoi sir le total est vide ou null
+            if(total != ""){
+                postSurServer();
+            }else{
+                console.log("message d'erreur article vide");
+            }
+            
+        });
     }
     
     console.log(products);
@@ -166,8 +197,8 @@ const recupererLesArticles = async () => {
 
 recupererLesArticles();
 
+//fonction message si panier vide
 
-//fonction qui actualise le total
 
 
 

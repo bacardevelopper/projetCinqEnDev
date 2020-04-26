@@ -51,9 +51,6 @@
          
     productScroll.appendChild(article);
          
-    
-         
-     
      article.appendChild(divInfo); 
      article.appendChild(linkAjout);  
      console.log(article);
@@ -65,7 +62,7 @@
  
  /***************************************************** debut fonction get */
   // fonction get (recuperer les elements du backend )
-  async function get(){
+  function get(){
       /* variable et fct global à get */
  
      // inserer dans le dom element recuperer */
@@ -92,6 +89,8 @@
  get();
  //appel de la fonction
  ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ 
  
 
  
