@@ -17,6 +17,7 @@ let idSansHashString = String(idSansHash);
 ///////////////////////////////////////////////////
 console.log(" id sans hash "+idSansHash);
 ///////////////////////////////////////////////////
+
 //fonction affichage d'erreur
 let bodyElt = document.body;
 let messageDerreur = document.createElement("h6");
@@ -33,13 +34,15 @@ let messageDerreur = document.createElement("h6");
         }, 8400);
         
     }
-
+    
+/* erreur sur la non selection des produits */
 if(idSansHash !== ""){
     console.log("produit selectionner");
 }else{
     erreurMsg();
     console.log("produit non selectionner");
 }
+/*                                        */
 
 //fonction recuper et ajouter dans le panier storage
 function ajouterPanier(){
@@ -63,7 +66,7 @@ function ajouterPanier(){
 //fin de fonction ajout au panier (storage)
 
 /* fonction recuperer et ajoute dans la page de personnalisation */
-async function recupArticleUrl(){
+function recupArticleUrl(){
     if(idSansHash !== ""){
         // inserer dans le dom element recuperer */
      let req = new XMLHttpRequest(); 

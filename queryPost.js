@@ -89,8 +89,11 @@ function postSurServer(){
                         //appel de la fonction post
                 magique();
                 endCommande();
-                /* document.location.href="confirmation.html"; */
-            } 
+                
+            }else{
+                console.log("le champs et vide ou l'email n'est pas vide");
+                erreurMsg(); 
+            }
         }else{
             console.log("le champs et vide ou l'email n'est pas vide");
             erreurMsg();
@@ -99,7 +102,7 @@ function postSurServer(){
 }
 
 /* la fonction magique envois les données dans sur la route post order*/
-async function magique(){
+function magique(){
     var order;
     //variable qui recupere le tableaux des produits et les champs contact
     let valeurEnvoyer;

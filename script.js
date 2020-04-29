@@ -1,12 +1,6 @@
  /* recuper et ajouter dans la page vue ou (accueil) */
   
  /* mes variables superglobales */
- //differencier les pages
- let titrePage = document.querySelector("title");
- let valeurTitre = titrePage.textContent;
- let ajouterProduit = document.querySelector("a");
- let fctAjouter = document.getElementsByTagName("a");
- 
  let productScroll = document.querySelector(".productScroll");
   
  let cpt = 0;
