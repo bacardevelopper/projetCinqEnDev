@@ -182,17 +182,18 @@ const recupererLesArticles = async () => {
             }
             
         
-        /* ecoute evenement click, pour envoit des articles et des informations sur le backend */
-        btnValider.addEventListener("click", function(){
-            //bloc l'envoi sir le total est vide ou null
-            if(total != ""){
-                postSurServer();
-            }else{
-                console.log("message d'erreur article vide");
-            }
-            
-        });
+        
     }
+    /* ecoute evenement click, pour envoit des articles et des informations sur le backend */
+    btnValider.addEventListener("click", function(){
+        //bloc l'envoi sir le total est vide ou null
+        if(total != ""){
+            postSurServer();
+        }else{
+            console.log("message d'erreur article vide");
+        }
+        
+    });
     
     console.log(products);
     //en dehors de la boucle   
