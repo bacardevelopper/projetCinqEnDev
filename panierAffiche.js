@@ -2,7 +2,7 @@ function afficherDansLaPagePanier(){
     let cpt = 0;
     let resumePanier = document.querySelector(".resume");
     // recuperer les elements du tableaux
-    /*                                                  */
+    /*                                 */
     while(cpt < localStorage.length){
         let idRecuper = JSON.parse(localStorage.getItem(localStorage.key(cpt)));
         let req = new XMLHttpRequest(); 
@@ -33,10 +33,9 @@ function afficherDansLaPagePanier(){
                                     eltDom.appendChild(eltImg); eltDom.appendChild(eltName); eltDom.appendChild(eltPrice);
                                     resumePanier.appendChild(eltDom);
                         }
-                        //
+                        //appel de la fonction
                         ajoutAuDom();
                 }
-
             cpt++;
         }
 

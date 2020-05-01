@@ -56,21 +56,23 @@
 
  //declaration e la fonction promise
 const accueilProducts = (url) =>{
-  /*on revoie une promesse qui prend en argument une fonction qui possede lui meme deux parametre la resolution et le succés */
+  /*on revoie une promesse qui prend en argument une fonction qui
+   possede lui meme deux parametre la resolution et le reject */
   return new Promise((resolve, reject)=>{
     let req = new XMLHttpRequest();
     req.open("GET", url, true);
      //fonction d'ecoute des requetes
-     req.onreadystatechange = function(){
-         if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
+    req.onreadystatechange = function(){
+        if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
                  //reponse json convertit en objet js
                  resolve(reponse = JSON.parse(this.response));
                      //appel de la fonction
                            recupInserer();
                             
-          }
-         // fin de si
-      }
+        }
+        reject();
+         
+    }
      // fin de la fonction d'ecoute
  
      
@@ -78,11 +80,10 @@ const accueilProducts = (url) =>{
   });
 }
 
-
 //appel de la fonction promise
 accueilProducts("http://localhost:3000/api/cameras")
   .then((response)=>{
     
   }).catch((req)=>{
-    
+
   });

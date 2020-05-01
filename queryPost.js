@@ -137,7 +137,7 @@ function magique(){
             }
             
     }                      
-    if(valeurEnvoyer.length > 1){
+    if(valeurEnvoyer.length !== null){
         requetePost.open("POST","http://localhost:3000/api/cameras/order");
         requetePost.setRequestHeader("Content-Type", "application/json");
         requetePost.send(valeurEnvoyer);
@@ -175,7 +175,7 @@ const recupererLesArticles = async () => {
 
             cpt++;
         }
-
+        
             reqItemsRecup.open("GET","http://localhost:3000/api/cameras/"+idRecuper.id);
             if(idRecuper.id !== undefined){
                 reqItemsRecup.send();
@@ -186,11 +186,12 @@ const recupererLesArticles = async () => {
     }
     /* ecoute evenement click, pour envoit des articles et des informations sur le backend */
     btnValider.addEventListener("click", function(){
-        //bloc l'envoi sir le total est vide ou null
-        if(total != ""){
-            postSurServer();
-        }else{
+        //si pas de produits dans le panier pas d'envoi
+        if(products.length === 0){
             console.log("message d'erreur article vide");
+            erreurMsg();  
+        }else{
+            postSurServer();
         }
         
     });

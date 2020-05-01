@@ -32,7 +32,6 @@ let messageDerreur = document.createElement("h6");
         setTimeout(function(){
             bodyElt.removeChild(messageDerreur);
         }, 8400);
-        
     }
     
 /* erreur sur la non selection des produits */
