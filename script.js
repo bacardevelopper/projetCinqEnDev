@@ -65,25 +65,21 @@ const accueilProducts = (url) =>{
     req.onreadystatechange = function(){
         if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
                  //reponse json convertit en objet js
-                 resolve(reponse = JSON.parse(this.response));
-                     //appel de la fonction
-                           recupInserer();
-                            
+                 reponse = JSON.parse(this.response);
+                 resolve(recupInserer());
+                     //appel de la fonction              
         }
-        reject();
-         
+        reject(req.status);
     }
      // fin de la fonction d'ecoute
- 
-     
      req.send(null);
   });
 }
-
 //appel de la fonction promise
 accueilProducts("http://localhost:3000/api/cameras")
-  .then((response)=>{
-    
-  }).catch((req)=>{
-
+  .then((reponse)=>{
+      //pas d'erreur
+  })
+  .catch((req)=>{
+      //erreur
   });
