@@ -1,3 +1,4 @@
+//la fonction qui permet d'afficher les produits selectionner dans la page panier
 function afficherDansLaPagePanier(){
     let cpt = 0;
     let resumePanier = document.querySelector(".resume");
@@ -16,9 +17,10 @@ function afficherDansLaPagePanier(){
                     
                     console.log("**********************************");
                     console.log(idRecuper.id);
-                    console.log("###### reponse reçu dans reponsPanier ######");
                     console.log(reponsPanier._id);
                     console.log(reponsPanier.price);
+                    console.log("###### reponse reçu dans reponsPanier ######");
+                   
 
                         //ajout des articles selectionner dans le dom du panier
                         function ajoutAuDom(){

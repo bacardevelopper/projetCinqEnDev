@@ -8,11 +8,10 @@ let urlHashTag = parsedUrl.hash;
 
 console.log("le hash : "+urlHashTag);
 let tabHash = Array.from(urlHashTag);
-console.log(tabHash.shift());
-//supprimer le premier element du tabaleaux
-let tabSimple = tabHash.splice(0);
+//retirer premier element de l'array est renvoyer le tableaux
+console.log("retirer 1ere element de l'array "+tabHash.shift());
 //convertit tableaux en chaine de caracteres
-let idSansHash = tabSimple.join("");
+let idSansHash = tabHash.join("");
 let idSansHashString = String(idSansHash); 
 ///////////////////////////////////////////////////
 console.log(" id sans hash "+idSansHash);
@@ -67,7 +66,7 @@ function ajouterPanier(){
 /* fonction recuperer et ajoute dans la page de personnalisation */
 function recupArticleUrl(){
     if(idSansHash !== ""){
-        // inserer dans le dom element recuperer */
+        
      let req = new XMLHttpRequest(); 
      //fonction d'ecoute des requetes
      req.onreadystatechange = function(){

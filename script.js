@@ -6,7 +6,7 @@
  
  /* fin des variables supergloables */
  
- //déclaration fonction qui insere les elements dans le dom de la page accueil (page vue)
+ /* déclaration fonction qui insere les elements dans le dom de la page accueil (page vue) */
  function recupInserer(){
      //boucle de création insertion
  while(cpt < reponse.length){
@@ -57,7 +57,7 @@
  //declaration e la fonction promise
 const accueilProducts = (url) =>{
   /*on revoie une promesse qui prend en argument une fonction qui
-   possede lui meme deux parametre la resolution et le reject */
+   possede lui meme deux parametres la resolution et le reject */
   return new Promise((resolve, reject)=>{
     let req = new XMLHttpRequest();
     req.open("GET", url, true);
@@ -69,7 +69,7 @@ const accueilProducts = (url) =>{
                  resolve(recupInserer());
                      //appel de la fonction              
         }
-        reject(req.status);
+        reject();
     }
      // fin de la fonction d'ecoute
      req.send(null);
@@ -77,9 +77,9 @@ const accueilProducts = (url) =>{
 }
 //appel de la fonction promise
 accueilProducts("http://localhost:3000/api/cameras")
-  .then((reponse)=>{
+  .then(()=>{
       //pas d'erreur
   })
-  .catch((req)=>{
+  .catch(()=>{
       //erreur
   });
