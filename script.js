@@ -1,12 +1,9 @@
-
- let productScroll = document.querySelector(".productScroll");
+let productScroll = document.querySelector(".productScroll");
   
  let cpt = 0;
  let reponse;
  
- /* fin des variables supergloables */
- 
- /* déclaration fonction qui insere les elements dans le dom de la page accueil (page vue) */
+ /* lafonction qui insere les elements dans le dom de la page accueil (page vue) */
  function recupInserer(){
      //boucle de création insertion
  while(cpt < reponse.length){
@@ -54,24 +51,23 @@
  /////////////////////////////////////////////////////////////////
 
 
- //declaration e la fonction promise
+ //la fonction qui fait la requete pour afficher les produits au panier
 const accueilProducts = (url) =>{
-  /*on revoie une promesse qui prend en argument une fonction qui
-   possede lui meme deux parametres la resolution et le reject */
+  
   return new Promise((resolve, reject)=>{
     let req = new XMLHttpRequest();
     req.open("GET", url, true);
-     //fonction d'ecoute des requetes
+    
     req.onreadystatechange = function(){
         if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
                  //reponse json convertit en objet js
                  reponse = JSON.parse(this.response);
                  resolve(recupInserer());
-                     //appel de la fonction              
+                                 
         }
         reject();
     }
-     // fin de la fonction d'ecoute
+     
      req.send(null);
   });
 }

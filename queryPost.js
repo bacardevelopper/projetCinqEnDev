@@ -72,7 +72,7 @@ function totalAfficher(){
     bodyElt.appendChild(totalHtml);
 }
 
-//fonction de fin de commande
+//fonction de gerer fin de commande
 function endCommande(){
     panierPage.removeChild(formulaireChild);
     panierPage.removeChild(resumeChild);
@@ -94,6 +94,7 @@ function postSurServer(){
                 console.log("le champs et vide ou l'email n'est pas vide");
                 erreurMsg(); 
             }
+
         }else{
             console.log("le champs et vide ou l'email n'est pas vide");
             erreurMsg();
@@ -104,6 +105,7 @@ function postSurServer(){
 /* la fonction magique envois les données dans sur la route post order*/
 function magique(){
     var order;
+
     //variable qui recupere le tableaux des produits et les champs contact
     let valeurEnvoyer;
     var contact = new Contact(eltPrenom.value, eltNom.value, eltEmail.value, eltA.value, eltVille.value);
@@ -124,15 +126,10 @@ function magique(){
                 messageMerci.style.textAlign = "center";
                 messageMerci.textContent = "Merci pour votre commande";
 
-
-                
-                
                 panierPage.appendChild(messageMerci);
                 panierPage.appendChild(msgIdOrder);
 
                 console.log(valeurEnvoyer);
-                /* panier page confirmation de commande */
-                
                 console.log("ok");    
             }
             
@@ -149,9 +146,9 @@ function magique(){
 /* cette fonction recuperer les elements qui sont dans le localstorage et ajoute dans le panier */ 
 const recupererLesArticles = async () => {
 
-
     let cpt = 0;
     let total = 0;
+
     while(cpt < localStorage.length){
         let idRecuper = JSON.parse(localStorage.getItem(localStorage.key(cpt)));
         let reqItemsRecup = new XMLHttpRequest(); 
@@ -169,7 +166,6 @@ const recupererLesArticles = async () => {
                     localStorage.setItem("total", JSON.stringify(total));
                     totalAfficher();
 
-                    
                     products.push(product_id.id);
                 }
 
@@ -180,9 +176,7 @@ const recupererLesArticles = async () => {
             if(idRecuper.id !== undefined){
                 reqItemsRecup.send();
             }
-            
-        
-        
+                
     }
     /* ecoute evenement click, pour envoit des articles et des informations sur le backend */
     btnValider.addEventListener("click", function(){
@@ -197,12 +191,11 @@ const recupererLesArticles = async () => {
     });
     
     console.log(products);
-    //en dehors de la boucle   
+     
 }
 
 recupererLesArticles();
 
-//fonction message si panier vide
 
 
 

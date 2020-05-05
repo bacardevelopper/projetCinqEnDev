@@ -2,18 +2,17 @@
 function afficherDansLaPagePanier(){
     let cpt = 0;
     let resumePanier = document.querySelector(".resume");
-    // recuperer les elements du tableaux
-    /*                                 */
+
     while(cpt < localStorage.length){
         let idRecuper = JSON.parse(localStorage.getItem(localStorage.key(cpt)));
         let req = new XMLHttpRequest(); 
-        //fonction d'ecoute des requetes
+        
             req.onreadystatechange = function(){
-                //ecoute de la requete
+                
                 if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
                     let reponsPanier = JSON.parse(this.response);
                     /*                                         */
-                    console.log("####### test de mon algorithme ######");
+                    console.log("####### test ######");
                     
                     console.log("**********************************");
                     console.log(idRecuper.id);
