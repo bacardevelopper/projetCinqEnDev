@@ -1,9 +1,8 @@
-let productScroll = document.querySelector(".productScroll");
-  
- let cpt = 0;
- let reponse;
+let productScroll = document.querySelector(".productScroll"); 
+let cpt = 0;
+let reponse;
  
- /* lafonction qui insere les elements dans le dom de la page accueil (page vue) */
+ /* la fonction qui insere les elements dans le dom de la page accueil (page vue) */
  function recupInserer(){
      //boucle de création insertion
  while(cpt < reponse.length){
@@ -49,7 +48,9 @@ let productScroll = document.querySelector(".productScroll");
  }
 
  /////////////////////////////////////////////////////////////////
-
+function erreur(){
+    console.log("erreur");
+}
 
  //la fonction qui fait la requete pour afficher les produits au panier
 const accueilProducts = (url) =>{
@@ -61,21 +62,30 @@ const accueilProducts = (url) =>{
     req.onreadystatechange = function(){
         if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
                  //reponse json convertit en objet js
+                 
+                 resolve();
                  reponse = JSON.parse(this.response);
-                 resolve(recupInserer());
-                                 
+                 recupInserer();
+                 console.log("la promesse asynchrone est tenu");                     
+        }else{
+            reject();
+            console.log("cherche a éxecuter la promesse asynchrone / donc promesse non tenu");
+            console.log("le status "+this.status)
+            
+
         }
-        reject();
+        
     }
      
      req.send(null);
+     console.log("fin code syncrhone");
   });
 }
 //appel de la fonction promise
 accueilProducts("http://localhost:3000/api/cameras")
   .then(()=>{
-      //pas d'erreur
+    
   })
   .catch(()=>{
-      //erreur
+    
   });

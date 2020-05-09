@@ -1,5 +1,6 @@
 //la fonction qui permet d'afficher les produits selectionner dans la page panier
 function afficherDansLaPagePanier(){
+    
     let cpt = 0;
     let resumePanier = document.querySelector(".resume");
 
@@ -13,6 +14,7 @@ function afficherDansLaPagePanier(){
                     let reponsPanier = JSON.parse(this.response);
                     /*                                         */
                     console.log("####### test ######");
+
                     
                     console.log("**********************************");
                     console.log(idRecuper.id);
@@ -31,8 +33,8 @@ function afficherDansLaPagePanier(){
                                 eltImg.setAttribute("src", eltAdd.imageUrl);
                                 eltPrice.textContent = eltAdd.price;
                                 eltName.textContent = eltAdd.name;
-                                    eltDom.appendChild(eltImg); eltDom.appendChild(eltName); eltDom.appendChild(eltPrice);
-                                    resumePanier.appendChild(eltDom);
+                                eltDom.appendChild(eltImg); eltDom.appendChild(eltName); eltDom.appendChild(eltPrice);
+                                resumePanier.appendChild(eltDom);
                         }
                         //appel de la fonction
                         ajoutAuDom();
@@ -43,9 +45,7 @@ function afficherDansLaPagePanier(){
         req.open("GET","http://localhost:3000/api/cameras/"+idRecuper.id);
         if(idRecuper.id !== undefined){
             req.send();
-        }
-        
-           
+        }    
     }
 }
 //appel de la fonction

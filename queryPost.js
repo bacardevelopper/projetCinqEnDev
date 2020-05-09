@@ -133,7 +133,8 @@ function magique(){
                 console.log("ok");    
             }
             
-    }                      
+    }
+
     if(valeurEnvoyer.length !== null){
         requetePost.open("POST","http://localhost:3000/api/cameras/order");
         requetePost.setRequestHeader("Content-Type", "application/json");
@@ -142,62 +143,65 @@ function magique(){
 
 }
 
-//recuperer les articles // fonction
-/* cette fonction recuperer les elements qui sont dans le localstorage et ajoute dans le panier */ 
-const recupererLesArticles = async () => {
+/* cette fonction recupere les elements qui sont dans le localstorage et ajoute dans le panier */ 
+const recupererLesArticles = () => {
+    //debut de ma promise
+    return new Promise((resolve, reject) => {
+        let cpt = 0;
+        let total = 0;
 
-    let cpt = 0;
-    let total = 0;
+        while(cpt < localStorage.length){
+            let idRecuper = JSON.parse(localStorage.getItem(localStorage.key(cpt)));
+            let reqItemsRecup = new XMLHttpRequest(); 
+            //fonction d'ecoute des requetes
+            reqItemsRecup.onreadystatechange = function(){
+                    //ecoute de la requete
+                    if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
+                        resolve();
+                        console.log("la promesse asynchrone est tenu");
+                        let rps = JSON.parse(this.response);
+                        /* ajouter l'id des produits dans le tableaux products */
+                        let product_id = new Produit(rps._id, rps.name, rps.price, rps.description, rps.imageUrl);
 
-    while(cpt < localStorage.length){
-        let idRecuper = JSON.parse(localStorage.getItem(localStorage.key(cpt)));
-        let reqItemsRecup = new XMLHttpRequest(); 
-        //fonction d'ecoute des requetes
-        reqItemsRecup.onreadystatechange = function(){
-                //ecoute de la requete
-                if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
-                    
-                    let rps = JSON.parse(this.response);
-                    /* ajouter l'id des produits dans le tableaux products */
-                    let product_id = new Produit(rps._id, rps.name, rps.price, rps.description, rps.imageUrl);
+                        //calcul du total
+                        total += rps.price;console.log(total);
+                        localStorage.setItem("total", JSON.stringify(total));
+                        totalAfficher();
 
-                    //calcul du total
-                    total += rps.price;console.log(total);
-                    localStorage.setItem("total", JSON.stringify(total));
-                    totalAfficher();
+                        products.push(product_id.id);
+                    }else{
+                        reject();
+                        console.log("cherche a éxecuter la promesse asynchrone / donc promesse non tenu");
 
-                    products.push(product_id.id);
-                }
+                    }
 
-            cpt++;
-        }
-        
-            reqItemsRecup.open("GET","http://localhost:3000/api/cameras/"+idRecuper.id);
-            if(idRecuper.id !== undefined){
-                reqItemsRecup.send();
+                cpt++;
             }
-                
-    }
-    /* ecoute evenement click, pour envoit des articles et des informations sur le backend */
-    btnValider.addEventListener("click", function(){
-        //si pas de produits dans le panier pas d'envoi
-        if(products.length === 0){
-            console.log("message d'erreur article vide");
-            erreurMsg();  
-        }else{
-            postSurServer();
+            
+                reqItemsRecup.open("GET","http://localhost:3000/api/cameras/"+idRecuper.id);
+                if(idRecuper.id !== undefined){
+                    reqItemsRecup.send();
+                }
+                    
         }
         
-    });
-    
-    console.log(products);
-     
+        /* ecoute evenement click, pour envoit des articles et des informations sur le backend */
+        btnValider.addEventListener("click", function(){
+            //si pas de produits dans le panier pas d'envoi
+            if(products.length === 0){
+                console.log("message d'erreur article vide");
+                erreurMsg();  
+            }else{
+                postSurServer();
+            }
+            
+        });
+        
+        console.log(products);
+    });       
+//fin de ma promise   
 }
 
-recupererLesArticles();
-
-
-
-
-
-
+recupererLesArticles()
+    .then(()=>{})
+    .catch(()=>{});
