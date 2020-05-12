@@ -91,12 +91,12 @@ function postSurServer(){
                 endCommande();
                 
             }else{
-                console.log("le champs et vide ou l'email n'est pas vide");
+                console.log("le champs et vide ou l'email n'est pas valide");
                 erreurMsg(); 
             }
 
         }else{
-            console.log("le champs et vide ou l'email n'est pas vide");
+            console.log("le champs et vide ou l'email n'est pas valide");
             erreurMsg();
             
         }
