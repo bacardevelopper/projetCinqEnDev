@@ -52,7 +52,7 @@ function erreur(){
     console.log("erreur");
 }
 
- //la fonction qui fait la requete pour afficher les produits au panier
+ //la fonction qui fait la requete pour afficher les produits à l'acceuil
 const accueilProducts = (url) =>{
   
   return new Promise((resolve, reject)=>{
