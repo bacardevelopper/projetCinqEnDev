@@ -132,7 +132,7 @@ function magique(){
                 console.log(valeurEnvoyer);
                 console.log("ok");    
             }
-            
+        
     }
 
     if(valeurEnvoyer.length !== null){
