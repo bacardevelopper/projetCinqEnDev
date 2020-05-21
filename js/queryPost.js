@@ -11,7 +11,7 @@ let formulaireChild = document.querySelector(".formulaire");
 let resumeChild = document.querySelector(".resume");
 let messageDerreur = document.createElement("h6");
     messageDerreur.setAttribute("id","erreur");
-    messageDerreur.textContent = "erreur verifier le champ ou selectionner produit";
+    messageDerreur.textContent = "erreur verifier les champs ou ajouter produit";
 
 /* fonction message d'erreur */
     function erreurMsg(){
@@ -143,8 +143,9 @@ function magique(){
 
 }
 
-/* cette fonction recupere les elements qui sont dans le localstorage et ajoute dans le panier */ 
-const recupererLesArticles = () => {
+
+/* cette fonction calcul le total et organise les données dans un tableaux avant l'envoit*/ 
+const recupererTotalEtPost = () => {
     //debut de ma promise
     return new Promise((resolve, reject) => {
         let cpt = 0;
@@ -164,7 +165,7 @@ const recupererLesArticles = () => {
                         let product_id = new Produit(rps._id, rps.name, rps.price, rps.description, rps.imageUrl);
 
                         //calcul du total
-                        total += rps.price;console.log(total);
+                        total += rps.price; console.log(total);
                         localStorage.setItem("total", JSON.stringify(total));
                         totalAfficher();
 
@@ -202,6 +203,7 @@ const recupererLesArticles = () => {
 //fin de ma promise   
 }
 
-recupererLesArticles()
+recupererTotalEtPost()
     .then(()=>{})
     .catch(()=>{});
+
