@@ -24,8 +24,7 @@ let messageDerreur = document.createElement("h6");
         }, 3400);
     }
 
-/* fonction message d'erreur */
-
+/* contient message validation de la commande */
 const messageMerci = document.createElement("h1");
 const msgIdOrder = document.createElement("h3");
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
