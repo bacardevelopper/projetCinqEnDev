@@ -176,3 +176,7 @@ body{
     border-radius:5px;
     z-index:9;
 }
+
+#imageDynamique:hover{
+    transform: scale(1.08);
+}
