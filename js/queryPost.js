@@ -33,8 +33,7 @@ const msgIdOrder = document.createElement("h3");
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-var products = [];
+let products = [];
 ///////////////////////////////////////////////////////////////////////////////
 class Produit {
   constructor(id, name, price, description, imageUrl) {
@@ -45,6 +44,7 @@ class Produit {
     this.imageUrl = imageUrl;
   }
 }
+
 //class pour l'objet contact
 class Contact {
   constructor(firstName, lastName, address, city, email) {
@@ -61,7 +61,8 @@ class Contact {
 function totalAfficher() {
   let totalHtml = document.createElement("span");
   totalHtml.setAttribute("id", "spanTotal");
-  totalHtml.textContent = 'Total : '+JSON.parse(localStorage.getItem("total")) +' BTC';
+  totalHtml.textContent =
+    "Total : " + JSON.parse(localStorage.getItem("total")) + " BTC";
   bodyElt.appendChild(totalHtml);
 }
 
@@ -101,7 +102,7 @@ function magique() {
 
   //variable qui recupere le tableaux des produits et les champs contact
   let valeurEnvoyer;
-  var contact = new Contact(
+  let contact = new Contact(
     eltPrenom.value,
     eltNom.value,
     eltEmail.value,
@@ -124,7 +125,6 @@ function magique() {
 
       panierPage.appendChild(messageMerci);
       panierPage.appendChild(msgIdOrder);
-
     }
   };
 
@@ -135,6 +135,18 @@ function magique() {
   }
 }
 
+/* fonction écoute d'écoute */
+const listenEventPost = () => {
+  btnValider.addEventListener("click", function () {
+    //si pas de produits dans le panier pas d'envoi
+    if (products.length === 0) {
+      erreurMsg();
+    } else {
+      postSurServer();
+    }
+  });
+};
+
 /* cette fonction calcul le total et organise les données dans un tableaux avant l'envoit*/
 
 const recupererTotalEtPost = () => {
@@ -143,7 +155,7 @@ const recupererTotalEtPost = () => {
     let cpt = 0;
     let total = 0;
     const urlCall = "http://localhost:3000/api/cameras/";
-
+    
     while (cpt < localStorage.length) {
       let idRecuper = JSON.parse(localStorage.getItem(localStorage.key(cpt)));
       let reqItemsRecup = new XMLHttpRequest();
@@ -152,7 +164,7 @@ const recupererTotalEtPost = () => {
         //ecoute de la requete
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
           resolve();
-          
+
           let rps = JSON.parse(this.response);
           /* ajouter l'id des produits dans le tableaux products */
           let product_id = new Produit(
@@ -165,7 +177,7 @@ const recupererTotalEtPost = () => {
 
           //calcul du total
           total += rps.price;
-          
+
           localStorage.setItem("total", JSON.stringify(total));
           totalAfficher();
 
@@ -177,22 +189,13 @@ const recupererTotalEtPost = () => {
         cpt++;
       };
 
-      reqItemsRecup.open("GET", urlCall+ idRecuper.id);
+      reqItemsRecup.open("GET", urlCall + idRecuper.id);
       if (idRecuper.id !== undefined) {
         reqItemsRecup.send();
       }
     }
-
     /* ecoute evenement click, pour envoit des articles et des informations sur le backend */
-    btnValider.addEventListener("click", function () {
-      //si pas de produits dans le panier pas d'envoi
-      if (products.length === 0) {
-        erreurMsg();
-      } else {
-        postSurServer();
-      }
-    });
-
+    listenEventPost();
   });
   //fin de ma promise
 };

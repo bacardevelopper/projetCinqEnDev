@@ -1,4 +1,5 @@
 //declaration
+/* les variables pour le bon fonctionnement */
 let reponse;
 let produitPage = document.querySelector(".produitPage");
 const urlCall = "http://localhost:3000/api/cameras/";
@@ -6,19 +7,16 @@ const urlCall = "http://localhost:3000/api/cameras/";
 var parsedUrl = new URL(window.location);
 //recuperation du hash de l'url actuelle
 let urlHashTag = parsedUrl.hash;
-
 let tabHash = Array.from(urlHashTag);
 tabHash.shift();
-
 let idSansHash = tabHash.join("");
-let idSansHashString = String(idSansHash);
-
 
 //les element qui servent à l'affichage de l'erreur
 let bodyElt = document.body;
 let messageDerreur = document.createElement("h6");
 messageDerreur.setAttribute("id", "erreur");
 messageDerreur.textContent = "selectionner produit à l'accueil";
+/* la fin des variables pour le bon fonctionnment */
 
 function erreurMsg() {
   setTimeout(function () {
@@ -39,6 +37,9 @@ function messageAffichageErreur() {
 }
 messageAffichageErreur();
 /*                                        */
+
+
+
 
 //fonction recuper et ajouter dans le panier storage
 function ajouterPanier() {
@@ -63,8 +64,10 @@ function ajouterPanier() {
   });
 }
 
+
+
 /* fonction recuperer et ajoute dans la page de personnalisation */
-function recupArticleUrl() {
+function recupArticleUrl(idSansHash) {
   return new Promise((resolve, reject) => {
     //debut promise
     if (idSansHash !== "") {
@@ -92,7 +95,7 @@ function recupArticleUrl() {
           imageArticle.setAttribute("src", reponse.imageUrl);
           imageArticle.setAttribute("id","imageDynamique");
           name.textContent = reponse.name;
-          prix.textContent = String(reponse.price);
+          prix.textContent = String(reponse.price) +' BTC';
           description.textContent = reponse.description;
 
           produitPage.appendChild(imageArticle);
@@ -108,7 +111,7 @@ function recupArticleUrl() {
           reject();
         }
       };
-      req.open("GET", urlCall + idSansHashString);
+      req.open("GET", urlCall + idSansHash);
       req.send();
       //appel de la fonction ajoute au panier
     }
@@ -117,7 +120,7 @@ function recupArticleUrl() {
   //fin de la promise
 }
 
-recupArticleUrl()
+recupArticleUrl(idSansHash)
   .then(() => {
     //
   })

@@ -1,9 +1,11 @@
 let productScroll = document.querySelector(".productScroll");
 let cpt = 0;
-let reponse;
 const urlCall = "http://localhost:3000/api/cameras";
+
+
+
 /* la fonction qui insere les elements dans le dom de la page accueil (page vue) */
-function recupInserer() {
+const recupInserer = (reponse) => {
   //boucle de création insertion
   while (cpt < reponse.length) {
     let linkAjout = document.createElement("a");
@@ -45,6 +47,9 @@ function recupInserer() {
   }
 }
 
+
+
+
 //la fonction qui fait la requete pour afficher les produits à l'acceuil
 const accueilProducts = (url) => {
   return new Promise((resolve, reject) => {
@@ -56,8 +61,8 @@ const accueilProducts = (url) => {
         //reponse json convertit en objet js
 
         resolve();
-        reponse = JSON.parse(this.response);
-        recupInserer();
+        let reponse = JSON.parse(this.response);
+        recupInserer(reponse);
       } else {
         reject();
       }
