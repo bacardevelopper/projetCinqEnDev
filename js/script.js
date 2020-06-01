@@ -1,4 +1,4 @@
-let productScroll = document.querySelector(".productScroll");
+
 let cpt = 0;
 const urlCall = "http://localhost:3000/api/cameras";
 
@@ -38,7 +38,7 @@ const recupInserer = (reponse) => {
 
     // verifier si c'est la page produit ou pas
 
-    productScroll.appendChild(article);
+    document.querySelector(".productScroll").appendChild(article);
 
     article.appendChild(divInfo);
     article.appendChild(linkAjout);

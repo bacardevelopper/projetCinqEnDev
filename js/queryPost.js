@@ -98,7 +98,7 @@ function postSurServer() {
 
 /* la fonction magique envois les données dans sur la route post order*/
 function magique() {
-  var order;
+  let order;
 
   //variable qui recupere le tableaux des produits et les champs contact
   let valeurEnvoyer;
@@ -155,7 +155,7 @@ const recupererTotalEtPost = () => {
     let cpt = 0;
     let total = 0;
     const urlCall = "http://localhost:3000/api/cameras/";
-    
+
     while (cpt < localStorage.length) {
       let idRecuper = JSON.parse(localStorage.getItem(localStorage.key(cpt)));
       let reqItemsRecup = new XMLHttpRequest();

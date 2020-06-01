@@ -19,7 +19,7 @@ const urlCall = "http://localhost:3000/api/cameras/";
 
 
 function afficherDansLaPagePanier() {
- 
+
   return new Promise((resolve, reject) => {
 
     let cpt = 0;
