@@ -109,6 +109,7 @@ function magique() {
     eltA.value,
     eltVille.value
   );
+  
   order = { contact, products };
 
   valeurEnvoyer = JSON.stringify(order);
@@ -126,7 +127,7 @@ function magique() {
       panierPage.appendChild(messageMerci);
       panierPage.appendChild(msgIdOrder);
     }
-  };
+  }
 
   if (valeurEnvoyer.length !== null) {
     requetePost.open("POST", urlpost);

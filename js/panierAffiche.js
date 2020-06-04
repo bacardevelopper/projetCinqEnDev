@@ -49,6 +49,7 @@ function afficherDansLaPagePanier() {
     }
   });
 }
+
 //appel de la fonction
 afficherDansLaPagePanier()
   .then(() => {})
