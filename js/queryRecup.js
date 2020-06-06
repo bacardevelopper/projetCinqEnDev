@@ -9,7 +9,7 @@ let urlHashTag = parsedUrl.hash;
 let tabHash = Array.from(urlHashTag);
 tabHash.shift();
 let idSansHash = tabHash.join("");
-console.log(idSansHash);
+
 //les element qui servent à l'affichage de l'erreur
 let bodyElt = document.body;
 let messageDerreur = document.createElement("h6");
@@ -120,6 +120,7 @@ function recupArticleUrl(idSansHash) {
 
   //fin de la promise
 }
+
 
 recupArticleUrl(idSansHash)
   .then(() => {

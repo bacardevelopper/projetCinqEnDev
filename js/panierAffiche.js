@@ -36,6 +36,7 @@ function afficherDansLaPagePanier() {
 
           //appel de la fonction
           ajoutAuDom(reponsPanier);
+          
         } else {
           reject();
         }

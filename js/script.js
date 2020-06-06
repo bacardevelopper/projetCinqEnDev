@@ -72,6 +72,8 @@ const accueilProducts = (url) => {
   });
 };
 //appel de la fonction promise
+
 accueilProducts(urlCall)
   .then(() => {})
   .catch(() => {});
+
