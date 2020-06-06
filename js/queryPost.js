@@ -96,7 +96,9 @@ function postSurServer() {
   }
 }
 
+
 /* la fonction magique envois les données dans sur la route post order*/
+
 function magique() {
   let order;
 
@@ -204,3 +206,4 @@ const recupererTotalEtPost = () => {
 recupererTotalEtPost()
   .then(() => {})
   .catch(() => {});
+
