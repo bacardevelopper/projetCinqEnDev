@@ -1,4 +1,3 @@
-
 let cpt = 0;
 const urlCall = "http://localhost:3000/api/cameras";
 
@@ -76,4 +75,3 @@ const accueilProducts = (url) => {
 accueilProducts(urlCall)
   .then(() => {})
   .catch(() => {});
-
